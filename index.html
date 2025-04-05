@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GPAT Gyan | PMS</title>
+  <style>
+    :root {
+      --cream-light: #FFF8F0;
+      --cream-dark: #F5E6D3;
+      --red-primary: #C41E3A;
+      --red-dark: #8A0C24;
+      --red-light: #F8E8EA;
+      --text-dark: #333333;
+      --text-light: #555555;
+    }
+    
+    body {
+      font-family: 'Times New Roman', serif;
+      background: linear-gradient(135deg, var(--cream-light), var(--cream-dark));
+      color: var(--text-dark);
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+    
+    .container {
+      max-width: 650px;
+      margin: 40px auto;
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 8px;
+      height: 100%;
+      background: var(--red-primary);
+    }
+    
+    .logo-container {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+    
+    .logo {
+      max-height: 130px;
+      max-width: 130%;
+      margin-bottom: 15px;
+    }
+    
+    h1 {
+      color: var(--red-primary);
+      margin-bottom: 30px;
+      font-weight: 700;
+      position: relative;
+      padding-bottom: 15px;
+      text-align: center;
+    }
+    
+    h1::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: var(--red-primary);
+    }
+    
+    .payment-option {
+      margin: 25px 0;
+      padding: 20px;
+      background: var(--cream-light);
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+    
+    .payment-option:hover {
+      box-shadow: 0 5px 15px rgba(196, 30, 58, 0.1);
+    }
+    
+    .clickable {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--red-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .clickable:hover {
+      color: var(--red-dark);
+    }
+    
+    .clickable i {
+      margin-right: 10px;
+    }
+    
+    .hidden {
+      display: none;
+    }
+    
+    .footer {
+      margin-top: 40px;
+      padding: 20px;
+      font-size: 14px;
+      background-color: var(--red-dark);
+      color: white;
+      text-align: center;
+      border-radius: 0 0 12px 12px;
+    }
+    
+    .security-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 20px 0;
+      color: var(--text-light);
+      font-size: 14px;
+    }
+    
+    .security-badge i {
+      color: var(--red-primary);
+      margin-right: 8px;
+      font-size: 18px;
+    }
+    
+    .form-container {
+      text-align: center;
+      margin: 30px 0;
+    }
+    
+    .form-button {
+      padding: 15px 30px;
+      background: var(--red-primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      margin: 20px 0;
+    }
+    
+    .form-button:hover {
+      background: var(--red-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(196, 30, 58, 0.3);
+    }
+    
+    .form-button i {
+      margin-right: 10px;
+    }
+    
+    .payment-details {
+      margin-top: 15px;
+      padding: 15px;
+      background: white;
+      border-radius: 8px;
+      border: 1px solid var(--cream-dark);
+      text-align: center;
+    }
+    
+    #upiText {
+      font-family: monospace;
+      font-size: 18px;
+      font-weight: bold;
+      color: var(--text-dark);
+    }
+    
+    #qrImage {
+      border: 1px solid var(--cream-dark);
+      padding: 10px;
+      background: white;
+      max-width: 100%;
+    }
+    
+    .timer {
+      font-size: 14px;
+      color: var(--text-light);
+      margin-top: 5px;
+    }
+    
+    .instructions {
+      background: var(--red-light);
+      padding: 20px;
+      border-radius: 8px;
+      margin: 25px 0;
+      border-left: 4px solid var(--red-primary);
+    }
+    
+    .instructions ol {
+      text-align: left;
+      padding-left: 20px;
+    }
+    
+    @media (max-width: 768px) {
+      .container {
+        margin: 20px;
+        padding: 25px;
+      }
+      
+      .logo {
+        max-height: 60px;
+      }
+      
+      .form-button {
+        width: 100%;
+        padding: 12px;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <div class="logo-container">
+    <img src="logo.png" alt="GPAT Gyan Logo" class="logo">  
+    </div>
+    
+    <h1><i class="fas fa-lock"></i> Payment Management System (PMS)</h1>
+    <div class="security-badge">
+      <i class="fas fa-shield-alt"></i>
+      <span>Secured Payment Gateway</span>
+    </div>
+    
+    <div class="instructions">
+      <h3><i class="fas fa-info-circle"></i> Payment Instructions</h3>
+      <ol>
+        <li>Choose your preferred payment method below</li>
+        <li>Complete the payment using the displayed details</li>
+        <li>Click the verification button to submit your payment details</li>
+        <li>You'll receive confirmation within 24 hours</li>
+      </ol>
+    </div>
+    
+    <div class="payment-option">
+      <p class="clickable" onclick="showQR()">
+        <i class="fas fa-qrcode"></i> Click to view QR Code Payment
+      </p>
+      <div id="qrImage" class="hidden payment-details">
+        <img src="https://via.placeholder.com/200x200?text=Payment+QR+Code" alt="Secure QR Code" width="200">
+        <p class="timer">Valid for next 10 minutes</p>
+      </div>
+    </div>
+    
+    <div class="payment-option">
+      <p class="clickable" onclick="showUPI()">
+        <i class="fas fa-mobile-alt"></i> Click to view UPI Payment Details
+      </p>
+      <div id="upiText" class="hidden payment-details">
+        <p>UPI ID: <span>update soon!</span></p>
+        <p>Name: GPAT_Gyan Official</p>
+        <p class="timer">Valid for next 10 minutes</p>
+      </div>
+    </div>
+    
+    <div class="form-container">
+      <a href="https://forms.gle/yourformlink" class="form-button" target="_blank">
+        <i class="fas fa-file-signature"></i> Verify Payment & Details Now
+      </a>
+      <p>After payment, please complete the verification form immediately</p>
+    </div>
+  </div>
+  
+  <footer class="footer">
+    <p><b>PMS is owned and administered by @GPAT_Gyan</b></p>
+  </footer>
+
+  <script>
+    function showQR() {
+      const qrElement = document.getElementById('qrImage');
+      qrElement.classList.toggle('hidden');
+    }
+
+    function showUPI() {
+      const upiElement = document.getElementById('upiText');
+      upiElement.classList.toggle('hidden');
+    }
+    
+    // Track form opens
+    document.querySelector('.form-button').addEventListener('click', function() {
+      console.log("Verification form opened at: " + new Date());
+    });
+  </script>
+</body>
+</html>
