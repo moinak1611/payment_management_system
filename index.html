@@ -13,26 +13,30 @@
       --red-light: #F8E8EA;
       --text-dark: #333333;
       --text-light: #555555;
+      --gold-accent: #FFD700;
+      --container-width: min(92%, 680px);
     }
     
     body {
-      font-family: 'Times New Roman', serif;
+      font-family: 'Georgia', serif;
       background: linear-gradient(135deg, var(--cream-light), var(--cream-dark));
       color: var(--text-dark);
       margin: 0;
       padding: 0;
       line-height: 1.6;
+      min-height: 100vh;
     }
     
     .container {
-      max-width: 650px;
-      margin: 40px auto;
+      width: var(--container-width);
+      margin: 30px auto;
       background: white;
-      padding: 40px;
-      border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      padding: clamp(25px, 5vw, 45px);
+      border-radius: 15px;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
       position: relative;
       overflow: hidden;
+      border: 1px solid rgba(196, 30, 58, 0.1);
     }
     
     .container::before {
@@ -40,29 +44,33 @@
       position: absolute;
       top: 0;
       left: 0;
-      width: 8px;
+      width: 10px;
       height: 100%;
-      background: var(--red-primary);
+      background: linear-gradient(to bottom, var(--red-primary), var(--red-dark));
     }
     
     .logo-container {
       text-align: center;
-      margin-bottom: 25px;
+      margin-bottom: 20px;
+      position: relative;
     }
     
     .logo {
-      max-height: 130px;
-      max-width: 130%;
+      height: auto;
+      width: min(100%, 150px);
       margin-bottom: 15px;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
     }
     
     h1 {
       color: var(--red-primary);
-      margin-bottom: 30px;
+      margin-bottom: clamp(20px, 4vw, 35px);
       font-weight: 700;
       position: relative;
       padding-bottom: 15px;
       text-align: center;
+      font-size: clamp(1.6rem, 5vw, 2rem);
+      text-shadow: 0 1px 2px rgba(0,0,0,0.1);
     }
     
     h1::after {
@@ -71,21 +79,36 @@
       bottom: 0;
       left: 50%;
       transform: translateX(-50%);
-      width: 60px;
-      height: 3px;
-      background: var(--red-primary);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(to right, var(--red-primary), var(--gold-accent));
+      border-radius: 2px;
     }
     
     .payment-option {
-      margin: 25px 0;
-      padding: 20px;
+      margin: clamp(20px, 4vw, 30px) 0;
+      padding: clamp(18px, 4vw, 25px);
       background: var(--cream-light);
-      border-radius: 8px;
+      border-radius: 10px;
       transition: all 0.3s ease;
+      border: 1px solid rgba(196, 30, 58, 0.08);
+      position: relative;
+      overflow: hidden;
     }
     
     .payment-option:hover {
-      box-shadow: 0 5px 15px rgba(196, 30, 58, 0.1);
+      box-shadow: 0 8px 25px rgba(196, 30, 58, 0.12);
+      transform: translateY(-3px);
+    }
+    
+    .payment-option::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--gold-accent);
     }
     
     .clickable {
@@ -95,6 +118,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      text-align: center;
+      font-size: clamp(1.05rem, 3.5vw, 1.15rem);
+      padding: 10px 0;
+      transition: all 0.3s;
     }
     
     .clickable:hover {
@@ -102,7 +129,9 @@
     }
     
     .clickable i {
-      margin-right: 10px;
+      margin-right: 12px;
+      font-size: clamp(1.1rem, 3.5vw, 1.3rem);
+      color: var(--red-dark);
     }
     
     .hidden {
@@ -110,42 +139,49 @@
     }
     
     .footer {
-      margin-top: 40px;
-      padding: 20px;
-      font-size: 14px;
-      background-color: var(--red-dark);
+      margin-top: clamp(25px, 6vw, 45px);
+      padding: 18px;
+      font-size: clamp(13px, 3vw, 15px);
+      background: linear-gradient(to right, var(--red-dark), var(--red-primary));
       color: white;
       text-align: center;
-      border-radius: 0 0 12px 12px;
+      border-radius: 0 0 15px 15px;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.2);
     }
     
     .security-badge {
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 20px 0;
-      color: var(--text-light);
-      font-size: 14px;
+      margin: clamp(15px, 4vw, 25px) 0;
+      color: var(--text-dark);
+      font-size: clamp(13px, 3vw, 15px);
+      background: var(--cream-light);
+      padding: 12px 20px;
+      border-radius: 50px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+      border: 1px solid rgba(196, 30, 58, 0.1);
     }
     
     .security-badge i {
-      color: var(--red-primary);
-      margin-right: 8px;
-      font-size: 18px;
+      color: var(--gold-accent);
+      margin-right: 10px;
+      font-size: clamp(16px, 4vw, 20px);
+      text-shadow: 0 1px 2px rgba(0,0,0,0.1);
     }
     
     .form-container {
       text-align: center;
-      margin: 30px 0;
+      margin: clamp(20px, 5vw, 35px) 0;
     }
     
     .form-button {
-      padding: 15px 30px;
-      background: var(--red-primary);
+      padding: clamp(14px, 4vw, 18px) clamp(25px, 5vw, 35px);
+      background: linear-gradient(to right, var(--red-primary), var(--red-dark));
       color: white;
       border: none;
-      border-radius: 8px;
-      font-size: 18px;
+      border-radius: 50px;
+      font-size: clamp(16px, 3.5vw, 18px);
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s;
@@ -153,83 +189,153 @@
       align-items: center;
       justify-content: center;
       text-decoration: none;
-      margin: 20px 0;
+      margin: clamp(15px, 4vw, 25px) 0;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 4px 15px rgba(196, 30, 58, 0.3);
+      position: relative;
+      overflow: hidden;
     }
     
     .form-button:hover {
-      background: var(--red-dark);
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(196, 30, 58, 0.3);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(196, 30, 58, 0.4);
+    }
+    
+    .form-button:active {
+      transform: translateY(1px);
     }
     
     .form-button i {
-      margin-right: 10px;
+      margin-right: 12px;
     }
     
     .payment-details {
-      margin-top: 15px;
-      padding: 15px;
+      margin-top: 20px;
+      padding: 20px;
       background: white;
-      border-radius: 8px;
-      border: 1px solid var(--cream-dark);
+      border-radius: 10px;
+      border: 1px solid rgba(196, 30, 58, 0.15);
       text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      animation: fadeIn 0.5s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     
     #upiText {
-      font-family: monospace;
-      font-size: 18px;
+      font-family: 'Courier New', monospace;
+      font-size: clamp(16px, 3.5vw, 18px);
       font-weight: bold;
       color: var(--text-dark);
     }
     
     #qrImage {
-      border: 1px solid var(--cream-dark);
-      padding: 10px;
+      border: 1px solid rgba(196, 30, 58, 0.1);
+      padding: 15px;
       background: white;
       max-width: 100%;
+      margin: 0 auto;
+      border-radius: 8px;
+    }
+    
+    #qrImage img {
+      width: 100%;
+      max-width: 220px;
+      height: auto;
+      border-radius: 5px;
     }
     
     .timer {
-      font-size: 14px;
+      font-size: clamp(13px, 3vw, 15px);
       color: var(--text-light);
-      margin-top: 5px;
+      margin-top: 10px;
+      font-style: italic;
     }
     
     .instructions {
       background: var(--red-light);
-      padding: 20px;
-      border-radius: 8px;
-      margin: 25px 0;
-      border-left: 4px solid var(--red-primary);
+      padding: clamp(18px, 4vw, 25px);
+      border-radius: 12px;
+      margin: clamp(20px, 5vw, 30px) 0;
+      border-left: 5px solid var(--red-primary);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    
+    .instructions h3 {
+      font-size: clamp(1.2rem, 4vw, 1.4rem);
+      margin-top: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--red-dark);
+    }
+    
+    .instructions h3 i {
+      margin-right: 12px;
+      color: var(--red-primary);
     }
     
     .instructions ol {
       text-align: left;
-      padding-left: 20px;
+      padding-left: clamp(15px, 5vw, 25px);
+      font-size: clamp(14px, 3.5vw, 16px);
     }
     
-    @media (max-width: 768px) {
+    .instructions li {
+      margin-bottom: 10px;
+      position: relative;
+      padding-left: 10px;
+    }
+    
+    .instructions li::before {
+      content: '';
+      position: absolute;
+      left: -5px;
+      top: 10px;
+      width: 8px;
+      height: 8px;
+      background: var(--red-primary);
+      border-radius: 50%;
+    }
+    
+    /* Responsive adjustments */
+    @media (min-width: 768px) {
       .container {
-        margin: 20px;
-        padding: 25px;
-      }
-      
-      .logo {
-        max-height: 60px;
+        margin: 50px auto;
       }
       
       .form-button {
-        width: 100%;
-        padding: 12px;
+        width: auto;
+        padding: 16px 40px;
       }
+      
+      .payment-option {
+        padding: 25px 30px;
+      }
+    }
+    
+    /* Animation for payment options */
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1); }
+    }
+    
+    .payment-option:hover {
+      animation: pulse 1.5s infinite;
     }
   </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Georgia:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="container">
     <div class="logo-container">
-    <img src="logo.png" alt="GPAT Gyan Logo" class="logo">  
+      <img src="logo.png" alt="GPAT Gyan Logo" class="logo">  
     </div>
     
     <h1><i class="fas fa-lock"></i> Payment Management System (PMS)</h1>
@@ -239,41 +345,44 @@
     </div>
     
     <div class="instructions">
-      <h3><i class="fas fa-info-circle"></i> Payment Instructions</h3>
+      <h3><i class="fas fa-lightbulb"></i> How To Complete Your Payment</h3>
       <ol>
-        <li>Choose your preferred payment method below</li>
-        <li>Complete the payment using the displayed details</li>
-        <li>Click the verification button to submit your payment details</li>
-        <li>You'll receive confirmation within 24 hours</li>
+        <li>Select your preferred payment method below.</li>
+        <li>Complete payment using the displayed details.</li>
+        <li>Submit the payment verification form immediately.</li>
+        <li>Receive instant confirmation by email.</li>
+        <li>Please upload the payment screenshot in the verification form.</li>
       </ol>
     </div>
     
     <div class="payment-option">
       <p class="clickable" onclick="showQR()">
-        <i class="fas fa-qrcode"></i> Click to view QR Code Payment
+        <i class="fas fa-qrcode"></i> QR Code Payment
       </p>
       <div id="qrImage" class="hidden payment-details">
-        <img src="https://via.placeholder.com/200x200?text=Payment+QR+Code" alt="Secure QR Code" width="200">
-        <p class="timer">Valid for next 10 minutes</p>
+        <img src="https://via.placeholder.com/220x220?text=Scan+QR+Code" alt="Secure QR Code">
+        <p class="timer">Valid for: 10 minutes</p>
       </div>
     </div>
     
     <div class="payment-option">
       <p class="clickable" onclick="showUPI()">
-        <i class="fas fa-mobile-alt"></i> Click to view UPI Payment Details
+        <i class="fas fa-mobile-alt"></i> UPI Payment
       </p>
       <div id="upiText" class="hidden payment-details">
-        <p>UPI ID: <span>update soon!</span></p>
-        <p>Name: GPAT_Gyan Official</p>
-        <p class="timer">Valid for next 10 minutes</p>
+        <p>UPI ID: <span>Update Soon!</span></p>
+        <p>Recipient: GPAT_Gyan Official</p>
+        <p class="timer">Valid for: 10 minutes</p>
       </div>
     </div>
     
     <div class="form-container">
       <a href="https://forms.gle/yourformlink" class="form-button" target="_blank">
-        <i class="fas fa-file-signature"></i> Verify Payment & Details Now
+        <i class="fas fa-check-circle"></i> Verify Payment Now
       </a>
-      <p>After payment, please complete the verification form immediately</p>
+      <p style="font-size: clamp(14px, 3.5vw, 16px); color: var(--text-light);">
+        <i class="fas fa-exclamation-circle"></i> After payment, please complete the verification form immediately.
+      </p>
     </div>
   </div>
   
@@ -284,17 +393,25 @@
   <script>
     function showQR() {
       const qrElement = document.getElementById('qrImage');
+      document.getElementById('upiText').classList.add('hidden');
       qrElement.classList.toggle('hidden');
     }
 
     function showUPI() {
       const upiElement = document.getElementById('upiText');
+      document.getElementById('qrImage').classList.add('hidden');
       upiElement.classList.toggle('hidden');
     }
     
-    // Track form opens
-    document.querySelector('.form-button').addEventListener('click', function() {
-      console.log("Verification form opened at: " + new Date());
+    // Add animation to payment options on load
+    document.addEventListener('DOMContentLoaded', function() {
+      const options = document.querySelectorAll('.payment-option');
+      options.forEach((option, index) => {
+        setTimeout(() => {
+          option.style.opacity = '1';
+          option.style.transform = 'translateY(0)';
+        }, index * 150);
+      });
     });
   </script>
 </body>
