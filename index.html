@@ -14,29 +14,41 @@
       --text-dark: #333333;
       --text-light: #555555;
       --gold-accent: #FFD700;
-      --container-width: min(92%, 680px);
+      --green-accent: #4CAF50;
+      --blue-accent: #2196F3;
+      --purple-accent: #9C27B0;
+      --container-width: min(95%, 1200px);
+      --course-card-width: min(100%, 500px);
+      --payment-card-width: min(100%, 400px);
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
     
     body {
-      font-family: 'Georgia', serif;
+      font-family: 'Poppins', 'Georgia', serif;
       background: linear-gradient(135deg, var(--cream-light), var(--cream-dark));
       color: var(--text-dark);
-      margin: 0;
-      padding: 0;
-      line-height: 1.6;
+      line-height: 1.7;
       min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
     
     .container {
       width: var(--container-width);
-      margin: 30px auto;
+      margin: 2rem auto;
       background: white;
-      padding: clamp(25px, 5vw, 45px);
-      border-radius: 15px;
-      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
+      padding: clamp(1.5rem, 5vw, 3rem);
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
       position: relative;
       overflow: hidden;
       border: 1px solid rgba(196, 30, 58, 0.1);
+      flex: 1;
     }
     
     .container::before {
@@ -44,33 +56,34 @@
       position: absolute;
       top: 0;
       left: 0;
-      width: 10px;
+      width: 12px;
       height: 100%;
       background: linear-gradient(to bottom, var(--red-primary), var(--red-dark));
     }
     
     .logo-container {
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 1.5rem;
       position: relative;
     }
     
     .logo {
       height: auto;
-      width: min(100%, 150px);
-      margin-bottom: 15px;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+      width: min(100%, 200px);
+      margin-bottom: 1rem;
+      filter: drop-shadow(0 3px 6px rgba(0,0,0,0.1));
     }
     
     h1 {
       color: var(--red-primary);
-      margin-bottom: clamp(20px, 4vw, 35px);
-      font-weight: 700;
+      margin-bottom: clamp(1.5rem, 5vw, 2.5rem);
+      font-weight: 800;
       position: relative;
-      padding-bottom: 15px;
+      padding-bottom: 1rem;
       text-align: center;
-      font-size: clamp(1.6rem, 5vw, 2rem);
-      text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+      font-size: clamp(1.8rem, 6vw, 2.5rem);
+      text-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      letter-spacing: -0.5px;
     }
     
     h1::after {
@@ -79,26 +92,197 @@
       bottom: 0;
       left: 50%;
       transform: translateX(-50%);
-      width: 80px;
-      height: 4px;
+      width: 120px;
+      height: 5px;
       background: linear-gradient(to right, var(--red-primary), var(--gold-accent));
-      border-radius: 2px;
+      border-radius: 3px;
+    }
+    
+    .course-sections {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+    
+    .course-section {
+      flex: 1 1 var(--course-card-width);
+      min-width: 300px;
+      background: white;
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(196, 30, 58, 0.1);
+      z-index: 1;
+    }
+    
+    .course-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(to right, var(--red-primary), var(--gold-accent));
+    }
+    
+    .course-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .course-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--gold-accent);
+      background: linear-gradient(135deg, var(--red-primary), var(--red-dark));
+      width: 70px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      box-shadow: 0 5px 15px rgba(196, 30, 58, 0.2);
+    }
+    
+    .course-title {
+      font-size: clamp(1.5rem, 4vw, 1.8rem);
+      color: var(--red-dark);
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+    
+    .course-highlight {
+      background: linear-gradient(135deg, var(--red-primary), var(--red-dark));
+      color: white;
+      padding: 0.5rem 1.5rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: clamp(0.9rem, 3vw, 1.1rem);
+      display: inline-block;
+      margin: 0 auto 1.5rem;
+      box-shadow: 0 5px 15px rgba(196, 30, 58, 0.2);
+      text-align: center;
+    }
+    
+    .course-features {
+      list-style-type: none;
+      padding: 0;
+      margin: 2rem 0;
+    }
+    
+    .course-features li {
+      margin: 1rem 0;
+      padding: 1rem;
+      background: var(--red-light);
+      border-radius: 10px;
+      font-size: clamp(0.9rem, 3.5vw, 1rem);
+      position: relative;
+      display: flex;
+      align-items: center;
+      border-left: 4px solid var(--red-primary);
+    }
+    
+    .course-features li::before {
+      content: '\f00c';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      color: var(--green-accent);
+      margin-right: 12px;
+      font-size: 1.2rem;
+    }
+    
+    .price-container {
+      text-align: center;
+      margin: 2rem 0;
+      position: relative;
+    }
+    
+    .price-tag {
+      font-size: clamp(1.8rem, 6vw, 2.5rem);
+      font-weight: 800;
+      color: var(--red-dark);
+      margin: 1rem 0;
+      position: relative;
+      display: inline-block;
+      padding: 0 2rem;
+      background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(196,30,58,0.05));
+      border-radius: 10px;
+    }
+    
+    .price-decoration {
+      position: absolute;
+      font-size: 1.5rem;
+      color: var(--gold-accent);
+      opacity: 0.7;
+    }
+    
+    .price-decoration.left {
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%) rotate(-15deg);
+    }
+    
+    .price-decoration.right {
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%) rotate(15deg);
+    }
+    
+    .original-price {
+      text-decoration: line-through;
+      color: var(--text-light);
+      font-size: 1.2rem;
+      margin-right: 0.8rem;
+      opacity: 0.7;
+    }
+    
+    .discount-badge {
+      background: var(--green-accent);
+      color: white;
+      padding: 0.3rem 1rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      position: absolute;
+      top: -0.8rem;
+      right: -1.5rem;
+      transform: rotate(10deg);
+      box-shadow: 0 3px 10px rgba(76, 175, 80, 0.3);
+    }
+    
+    .payment-options-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+      margin: 2.5rem 0 1.5rem;
     }
     
     .payment-option {
-      margin: clamp(20px, 4vw, 30px) 0;
-      padding: clamp(18px, 4vw, 25px);
-      background: var(--cream-light);
-      border-radius: 10px;
-      transition: all 0.3s ease;
-      border: 1px solid rgba(196, 30, 58, 0.08);
+      flex: 1 1 var(--payment-card-width);
+      min-width: 280px;
+      padding: 1.5rem;
+      background: white;
+      border-radius: 15px;
+      transition: all 0.4s ease;
+      border: 1px solid rgba(196, 30, 58, 0.1);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.05);
       position: relative;
       overflow: hidden;
     }
     
     .payment-option:hover {
-      box-shadow: 0 8px 25px rgba(196, 30, 58, 0.12);
-      transform: translateY(-3px);
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(196, 30, 58, 0.15);
     }
     
     .payment-option::before {
@@ -106,31 +290,34 @@
       position: absolute;
       top: 0;
       left: 0;
-      width: 4px;
+      width: 5px;
       height: 100%;
-      background: var(--gold-accent);
+      background: linear-gradient(to bottom, var(--gold-accent), var(--red-primary));
     }
     
     .clickable {
       cursor: pointer;
-      font-weight: 600;
+      font-weight: 700;
       color: var(--red-primary);
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      font-size: clamp(1.05rem, 3.5vw, 1.15rem);
-      padding: 10px 0;
+      font-size: clamp(1.1rem, 3.5vw, 1.2rem);
+      padding: 1rem;
       transition: all 0.3s;
+      background: rgba(196, 30, 58, 0.05);
+      border-radius: 10px;
     }
     
     .clickable:hover {
       color: var(--red-dark);
+      background: rgba(196, 30, 58, 0.1);
     }
     
     .clickable i {
-      margin-right: 12px;
-      font-size: clamp(1.1rem, 3.5vw, 1.3rem);
+      margin-right: 1rem;
+      font-size: clamp(1.2rem, 3.5vw, 1.4rem);
       color: var(--red-dark);
     }
     
@@ -139,198 +326,288 @@
     }
     
     .footer {
-      margin-top: clamp(25px, 6vw, 45px);
-      padding: 18px;
-      font-size: clamp(10px, 3vw, 13px);
+      margin-top: auto;
+      padding: 1.5rem;
+      font-size: clamp(0.7rem, 3vw, 0.9rem);
       background: linear-gradient(to right, var(--red-dark), var(--red-primary));
       color: white;
       text-align: center;
-      border-radius: 0 0 15px 15px;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+      text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+      width: 100%;
     }
     
     .security-badge {
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: clamp(15px, 4vw, 25px) 0;
+      margin: 2rem 0;
       color: var(--text-dark);
-      font-size: clamp(13px, 3vw, 15px);
-      background: var(--cream-light);
-      padding: 12px 20px;
+      font-size: clamp(0.9rem, 3vw, 1rem);
+      background: white;
+      padding: 1rem 1.5rem;
       border-radius: 50px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
       border: 1px solid rgba(196, 30, 58, 0.1);
     }
     
     .security-badge i {
       color: var(--gold-accent);
-      margin-right: 10px;
-      font-size: clamp(16px, 4vw, 20px);
-      text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+      margin-right: 1rem;
+      font-size: clamp(1.2rem, 4vw, 1.5rem);
+      text-shadow: 0 2px 3px rgba(0,0,0,0.1);
     }
     
     .form-container {
       text-align: center;
-      margin: clamp(20px, 5vw, 35px) 0;
+      margin: 2.5rem 0;
     }
     
     .form-button {
-      padding: clamp(14px, 4vw, 18px) clamp(25px, 5vw, 35px);
+      padding: clamp(1rem, 4vw, 1.2rem) clamp(2rem, 5vw, 3rem);
       background: linear-gradient(to right, var(--red-primary), var(--red-dark));
       color: white;
       border: none;
       border-radius: 50px;
-      font-size: clamp(16px, 3.5vw, 18px);
-      font-weight: 600;
+      font-size: clamp(1rem, 3.5vw, 1.2rem);
+      font-weight: 700;
       cursor: pointer;
-      transition: all 0.3s;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       display: inline-flex;
       align-items: center;
       justify-content: center;
       text-decoration: none;
-      margin: clamp(15px, 4vw, 25px) 0;
+      margin: 1.5rem 0;
       width: 100%;
-      max-width: 420px;
-      box-shadow: 0 4px 15px rgba(196, 30, 58, 0.3);
+      max-width: 450px;
+      box-shadow: 0 5px 20px rgba(196, 30, 58, 0.3);
       position: relative;
       overflow: hidden;
+      letter-spacing: 0.5px;
     }
     
     .form-button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(196, 30, 58, 0.4);
+      transform: translateY(-5px) scale(1.03);
+      box-shadow: 0 10px 30px rgba(196, 30, 58, 0.4);
     }
     
     .form-button:active {
-      transform: translateY(1px);
+      transform: translateY(2px);
+    }
+    
+    .form-button::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        to bottom right,
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,0) 45%,
+        rgba(255,255,255,0.5) 48%,
+        rgba(255,255,255,0) 52%,
+        rgba(255,255,255,0) 100%
+      );
+      transform: rotate(30deg);
+      transition: all 0.6s ease;
+    }
+    
+    .form-button:hover::after {
+      left: 100%;
+      top: 100%;
     }
     
     .form-button i {
-      margin-right: 12px;
+      margin-right: 1rem;
+      font-size: 1.3rem;
     }
     
     .payment-details {
-      margin-top: 20px;
-      padding: 20px;
+      margin-top: 1.5rem;
+      padding: 1.5rem;
       background: white;
-      border-radius: 10px;
+      border-radius: 12px;
       border: 1px solid rgba(196, 30, 58, 0.15);
       text-align: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-      animation: fadeIn 0.5s ease;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
     }
     
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    
-    #upiText {
+    .upi-text {
       font-family: 'Courier New', monospace;
-      font-size: clamp(16px, 3.5vw, 18px);
-      font-weight: bold;
+      font-size: clamp(1rem, 3.5vw, 1.2rem);
+      font-weight: 700;
       color: var(--text-dark);
+      margin: 0.5rem 0;
+      word-break: break-all;
     }
     
-    #qrImage {
+    .qr-image {
       border: 1px solid rgba(196, 30, 58, 0.1);
-      padding: 15px;
+      padding: 1.5rem;
       background: white;
       max-width: 100%;
       margin: 0 auto;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+    
+    .qr-image img {
+      width: 100%;
+      max-width: 250px;
+      height: auto;
       border-radius: 8px;
     }
     
-    #qrImage img {
-      width: 100%;
-      max-width: 220px;
-      height: auto;
-      border-radius: 5px;
-    }
-    
     .timer {
-      font-size: clamp(13px, 3vw, 15px);
+      font-size: clamp(0.9rem, 3vw, 1rem);
       color: var(--text-light);
-      margin-top: 10px;
+      margin-top: 1rem;
       font-style: italic;
     }
     
     .instructions {
       background: var(--red-light);
-      padding: clamp(18px, 4vw, 25px);
-      border-radius: 12px;
-      margin: clamp(20px, 5vw, 30px) 0;
-      border-left: 5px solid var(--red-primary);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      padding: clamp(1.5rem, 4vw, 2rem);
+      border-radius: 15px;
+      margin: clamp(1.5rem, 5vw, 2.5rem) 0;
+      border-left: 6px solid var(--red-primary);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      position: relative;
+      overflow: hidden;
     }
     
     .instructions h3 {
-      font-size: clamp(1.2rem, 4vw, 1.4rem);
-      margin-top: 0;
+      font-size: clamp(1.3rem, 4vw, 1.6rem);
+      margin-bottom: 1.5rem;
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--red-dark);
+      position: relative;
     }
     
     .instructions h3 i {
-      margin-right: 12px;
+      margin-right: 1rem;
       color: var(--red-primary);
+      font-size: 1.8rem;
     }
     
     .instructions ol {
       text-align: left;
-      padding-left: clamp(15px, 5vw, 25px);
-      font-size: clamp(14px, 3.5vw, 16px);
+      padding-left: clamp(1rem, 5vw, 2rem);
+      font-size: clamp(0.95rem, 3.5vw, 1.1rem);
+      position: relative;
+      z-index: 1;
     }
     
     .instructions li {
-      margin-bottom: 10px;
+      margin-bottom: 1rem;
       position: relative;
-      padding-left: 10px;
+      padding-left: 1.5rem;
     }
     
     .instructions li::before {
       content: '';
       position: absolute;
-      left: -5px;
-      top: 10px;
-      width: 8px;
-      height: 8px;
+      left: 0;
+      top: 0.7rem;
+      width: 10px;
+      height: 10px;
       background: var(--red-primary);
       border-radius: 50%;
     }
     
+    .popular-ribbon {
+      position: absolute;
+      top: 20px;
+      right: -50px;
+      background: var(--gold-accent);
+      color: var(--red-dark);
+      padding: 0.5rem 4rem;
+      font-size: 0.9rem;
+      font-weight: 800;
+      transform: rotate(45deg);
+      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+      z-index: 2;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .guarantee-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 2rem auto;
+      padding: 1rem;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      max-width: 500px;
+      border: 1px dashed var(--gold-accent);
+    }
+    
+    .guarantee-badge i {
+      color: var(--gold-accent);
+      font-size: 2rem;
+      margin-right: 1rem;
+    }
+    
+    .guarantee-text {
+      font-size: clamp(0.9rem, 3vw, 1rem);
+      font-weight: 500;
+    }
+    
     /* Responsive adjustments */
-    @media (min-width: 768px) {
+    @media (max-width: 768px) {
+      .course-sections {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .course-section {
+        width: 100%;
+      }
+      
+      .payment-options-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .popular-ribbon {
+        right: -60px;
+        padding: 0.4rem 3.5rem;
+        font-size: 0.8rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
       .container {
-        margin: 50px auto;
+        padding: 1.5rem;
       }
       
-      .form-button {
-        width: auto;
-        padding: 16px 40px;
+      .course-section {
+        padding: 1.5rem;
       }
       
-      .payment-option {
-        padding: 25px 30px;
+      .price-tag {
+        padding: 0 1.5rem;
       }
-    }
-    
-    /* Animation for payment options */
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.02); }
-      100% { transform: scale(1); }
-    }
-    
-    .payment-option:hover {
-      animation: pulse 1.5s infinite;
+      
+      .discount-badge {
+        right: -1rem;
+        top: -1rem;
+      }
+      
+      .popular-ribbon {
+        right: -70px;
+        padding: 0.3rem 3rem;
+        font-size: 0.7rem;
+      }
     }
   </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Georgia:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Georgia:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="container">
@@ -338,79 +615,220 @@
       <img src="logo.png" alt="GPAT Gyan Logo" class="logo">  
     </div>
     
-    <h1><i class="fas fa-lock"></i> Payment Management System (PMS)</h1>
+    <h1><i class="fas fa-graduation-cap"></i> Payment Management System (PMS)</h1>
     <div class="security-badge">
       <i class="fas fa-shield-alt"></i>
-      <span>Secured Payment Gateway</span>
+      <span>Secure Payment Gateway</span>
     </div>
     
     <div class="instructions">
-      <h3><i class="fas fa-lightbulb"></i> How To Complete Your Payment</h3>
+      <h3><i class="fas fa-lightbulb"></i> How To Enroll in 3 Simple Steps</h3>
       <ol>
-        <li>Select your preferred payment method below.</li>
-        <li>Complete payment using the displayed details.</li>
-        <li>Submit the payment verification form immediately.</li>
-        <li>Receive instant confirmation by email.</li>
-        <li>Please upload the payment screenshot in the verification form.</li>
+        <li><strong>Select</strong> your preferred course duration below</li>
+        <li><strong>Choose</strong> your payment method (QR or UPI)</li>
+        <li><strong>Complete</strong> payment and verify immediately</li>
       </ol>
     </div>
     
-    <div class="payment-option">
-      <p class="clickable" onclick="showQR()">
-        <i class="fas fa-qrcode"></i> QR Code Payment
-      </p>
-      <div id="qrImage" class="hidden payment-details">
-        <img src="https://via.placeholder.com/220x220?text=Scan+QR+Code" alt="Secure QR Code">
-        <p class="timer">Valid for: 10 minutes</p>
+    <div class="guarantee-badge">
+      <i class="fas fa-medal"></i>
+      <div class="guarantee-text">
+        <strong>GPAT Gyan: Cheers for the success
       </div>
     </div>
     
-    <div class="payment-option">
-      <p class="clickable" onclick="showUPI()">
-        <i class="fas fa-mobile-alt"></i> UPI Payment
-      </p>
-      <div id="upiText" class="hidden payment-details">
-        <p>UPI ID: <span>Update Soon!</span></p>
-        <p>Recipient: GPAT_Gyan Official</p>
-        <p class="timer">Valid for: 10 minutes</p>
+    <div class="course-sections">
+      <!-- 1 Year Course Section -->
+      <div class="course-section">
+        <div class="course-header">
+          <div class="course-icon">
+            <i class="fas fa-calendar-alt"></i>
+          </div>
+          <h2 class="course-title">1 Year Comprehensive Course</h2>
+          <div class="course-highlight">
+            <i class="fas fa-star"></i> Best for Focused Preparation
+          </div>
+        </div>
+        
+        <ul class="course-features">
+          <li>Premium online coaching (1 Year online class)</li>
+          <li>live classes</li>
+          <li>e-Notes</li>
+          <li>Weekly assesments</li>
+          <li>Mock test</li>
+          <li>1-to-1 interaction</li>
+          <li>Trilingual session (English, Hindi & Bengali)</li>
+          <li>GPAT qualified rankers & trusted educators</li>         
+        </ul>
+        
+        <div class="price-container">
+          <div class="price-tag">
+            <span class="price-decoration left">✦</span>
+            <span class="original-price">₹4000</span>
+            ₹2399
+            <span class="price-decoration right">✦</span>
+            <span class="discount-badge">Save 40%</span>
+          </div>
+        </div>
+        
+        <div class="payment-options-container">
+          <div class="payment-option">
+            <p class="clickable" onclick="showQR('1year')">
+              <i class="fas fa-qrcode"></i> Pay with QR Code
+            </p>
+            <div id="qrImage1year" class="hidden payment-details">
+              <div class="qr-image">
+                <img src="1_yr.jpeg" alt="1 Year Course QR Code">
+              </div>
+              <p class="upi-text">Amount: ₹2399</p>
+              <p class="timer"><i class="fas fa-clock"></i> Valid for: 15 minutes</p>
+            </div>
+          </div>
+          
+          <div class="payment-option">
+            <p class="clickable" onclick="showUPI('1year')">
+              <i class="fas fa-mobile-alt"></i> Pay via UPI
+            </p>
+            <div id="upiText1year" class="hidden payment-details">
+              <p class="upi-text">bhowmikrajib06@okicici</p>
+              <p><strong>Recipient:</strong> GPAT_Gyan Official</p>
+              <p class="upi-text">Amount: ₹2399</p>
+              <p class="timer"><i class="fas fa-clock"></i> Valid for: 15 minutes</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 1.5 Year Course Section -->
+      <div class="course-section" style="position: relative;">
+        <div class="popular-ribbon">Popular</div>
+        <div class="course-header">
+          <div class="course-icon">
+            <i class="fas fa-calendar-check"></i>
+          </div>
+          <h2 class="course-title">1.5 Year Extended Course</h2>
+          <div class="course-highlight">
+            <i class="fas fa-trophy"></i> Best Value Package
+          </div>
+        </div>
+        
+        <ul class="course-features">
+          <li><strong>Everything in 1 Year Course</strong></li>
+          <li>Additional 6 months extended access</li>
+          <li>Personalized 1-on-1 mentorship</li>
+          <li>Priority doubt resolution</li>
+          <li>Subject specific guide</li>
+          <li>Live interactive sessions with toppers from vibrant places</li>
+        </ul>
+        
+        <div class="price-container">
+          <div class="price-tag">
+            <span class="price-decoration left">✦</span>
+            <span class="original-price">₹6000</span>
+            ₹3599
+            <span class="price-decoration right">✦</span>
+            <span class="discount-badge">Save 40%</span>
+          </div>
+        </div>
+        
+        <div class="payment-options-container">
+          <div class="payment-option">
+            <p class="clickable" onclick="showQR('1.5year')">
+              <i class="fas fa-qrcode"></i> Pay with QR Code
+            </p>
+            <div id="qrImage1.5year" class="hidden payment-details">
+              <div class="qr-image">
+                <img src="1.5_yr.jpeg" alt="1.5 Year Course QR Code">
+              </div>
+              <p class="upi-text">Amount: ₹3599</p>
+              <p class="timer"><i class="fas fa-clock"></i> Valid for: 15 minutes</p>
+            </div>
+          </div>
+          
+          <div class="payment-option">
+            <p class="clickable" onclick="showUPI('1.5year')">
+              <i class="fas fa-mobile-alt"></i> Pay via UPI
+            </p>
+            <div id="upiText1.5year" class="hidden payment-details">
+              <p class="upi-text">bhowmikrajib06@okicici</p>
+              <p><strong>Recipient:</strong> GPAT_Gyan Official</p>
+              <p class="upi-text">Amount: ₹3599</p>
+              <p class="timer"><i class="fas fa-clock"></i> Valid for: 15 minutes</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     
     <div class="form-container">
-      <a href="https://forms.gle/yourformlink" class="form-button" target="_blank">
-        <i class="fas fa-check-circle"></i> Verify Payment Now
+      <a href="https://forms.gle/uKzPT4tiVgrw2tRK8" class="form-button" target="_blank">
+        <i class="fas fa-check-circle"></i> Click Here to Verify Payment
       </a>
-      <p style="font-size: clamp(14px, 3.5vw, 16px); color: var(--text-light);">
-        <i class="fas fa-exclamation-circle"></i> After payment, please complete the verification form immediately.
+      <p style="font-size: clamp(0.9rem, 3.5vw, 1.1rem); color: var(--text-light); margin-top: 1rem;">
+        <i class="fas fa-exclamation-circle"></i> <strong>Important:</strong> After payment, complete verification form immediately for instant access.
       </p>
+    </div>
+    
+    <div class="security-badge">
+      <i class="fas fa-envelope"></i>
+      <span>Contact Support: gpatgyanofficial@gmail.com</span>
     </div>
   </div>
   
   <footer class="footer">
-    <p><b>PMS is owned and administered by @GPAT_Gyan</b></p>
+    <p>PMS is owned and administered by @GPAT_Gyan</p>
   </footer>
 
   <script>
-    function showQR() {
-      const qrElement = document.getElementById('qrImage');
-      document.getElementById('upiText').classList.add('hidden');
-      qrElement.classList.toggle('hidden');
+    // Payment methods toggle
+    function showQR(courseType) {
+      // Hide all payment details first
+      document.querySelectorAll('.payment-details').forEach(el => {
+        el.classList.add('hidden');
+      });
+      
+      // Show the selected QR
+      const qrElement = document.getElementById(`qrImage${courseType}`);
+      qrElement.classList.remove('hidden');
+      
+      // Scroll to the payment option
+      qrElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
-    function showUPI() {
-      const upiElement = document.getElementById('upiText');
-      document.getElementById('qrImage').classList.add('hidden');
-      upiElement.classList.toggle('hidden');
+    function showUPI(courseType) {
+      // Hide all payment details first
+      document.querySelectorAll('.payment-details').forEach(el => {
+        el.classList.add('hidden');
+      });
+      
+      // Show the selected UPI
+      const upiElement = document.getElementById(`upiText${courseType}`);
+      upiElement.classList.remove('hidden');
+      
+      // Scroll to the payment option
+      upiElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
     
-    // Add animation to payment options on load
+    // Initialize interactive elements
     document.addEventListener('DOMContentLoaded', function() {
-      const options = document.querySelectorAll('.payment-option');
-      options.forEach((option, index) => {
-        setTimeout(() => {
-          option.style.opacity = '1';
-          option.style.transform = 'translateY(0)';
-        }, index * 150);
+      // Add ripple effect to buttons
+      const buttons = document.querySelectorAll('.form-button');
+      buttons.forEach(button => {
+        button.addEventListener('click', function(e) {
+          const x = e.clientX - e.target.getBoundingClientRect().left;
+          const y = e.clientY - e.target.getBoundingClientRect().top;
+          
+          const ripple = document.createElement('span');
+          ripple.classList.add('ripple');
+          ripple.style.left = `${x}px`;
+          ripple.style.top = `${y}px`;
+          
+          this.appendChild(ripple);
+          
+          setTimeout(() => {
+            ripple.remove();
+          }, 1000);
+        });
       });
     });
   </script>
