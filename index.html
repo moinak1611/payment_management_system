@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -309,6 +308,7 @@
       transition: all 0.3s;
       background: rgba(196, 30, 58, 0.05);
       border-radius: 10px;
+      margin: 0;
     }
     
     .clickable:hover {
@@ -559,6 +559,22 @@
       font-weight: 500;
     }
     
+    /* Ripple effect for buttons */
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      transform: scale(0);
+      animation: ripple-animation 0.6s linear;
+    }
+    
+    @keyframes ripple-animation {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+    
     /* Responsive adjustments */
     @media (max-width: 768px) {
       .course-sections {
@@ -634,7 +650,7 @@
     <div class="guarantee-badge">
       <i class="fas fa-medal"></i>
       <div class="guarantee-text">
-        <strong>GPAT GYAN: Cheers for the success
+        <strong>GPAT GYAN: Cheers for the success</strong>
       </div>
     </div>
     
@@ -653,9 +669,9 @@
         
         <ul class="course-features">
           <li>Premium online coaching (1 Year online class)</li>
-          <li>live classes</li>
+          <li>Live classes</li>
           <li>e-Notes</li>
-          <li>Weekly assesments</li>
+          <li>Weekly assessments</li>
           <li>Mock test</li>
           <li>1-to-1 interaction</li>
           <li>Trilingual session (English, Hindi & Bengali)</li>
@@ -700,7 +716,7 @@
         </div>
       </div>
       
-      <!-- 1.5 Year Course Section -->
+      <!-- 2 Year Course Section -->
       <div class="course-section" style="position: relative;">
         <div class="popular-ribbon">Popular</div>
         <div class="course-header">
@@ -715,11 +731,11 @@
         
         <ul class="course-features">
           <li><strong>Everything in 1 Year Course</strong></li>
-          <li>Additional 6 months extended access</li>
+          <li>Additional 1 year extended access</li>
           <li>Personalized 1-on-1 mentorship</li>
           <li>Priority doubt resolution</li>
           <li>Subject specific guide</li>
-          <li>Live interactive sessions with toppers from vibrant places</li>
+          <li>Live interactive sessions with toppers</li>
         </ul>
         
         <div class="price-container">
@@ -734,12 +750,12 @@
         
         <div class="payment-options-container">
           <div class="payment-option">
-            <p class="clickable" onclick="showQR('1.5year')">
+            <p class="clickable" onclick="showQR('2year')">
               <i class="fas fa-qrcode"></i> Pay with QR Code
             </p>
-            <div id="qrImage1.5year" class="hidden payment-details">
+            <div id="qrImage2year" class="hidden payment-details">
               <div class="qr-image">
-                <img src="p_qr.jpeg" alt="1.5 Year Course QR Code">
+                <img src="p_qr.jpeg" alt="2 Year Course QR Code">
               </div>
               <p class="upi-text">Amount: ₹2,300</p>
               <p class="timer"><i class="fas fa-clock"></i> Valid for: 15 minutes</p>
@@ -747,10 +763,10 @@
           </div>
           
           <div class="payment-option">
-            <p class="clickable" onclick="showUPI('1.5year')">
+            <p class="clickable" onclick="showUPI('2year')">
               <i class="fas fa-mobile-alt"></i> Pay via UPI
             </p>
-            <div id="upiText1.5year" class="hidden payment-details">
+            <div id="upiText2year" class="hidden payment-details">
               <p class="upi-text">update soon! (Use QR Code)</p>
               <p><strong>Recipient:</strong> GPAT_Gyan Official</p>
               <p class="upi-text">Amount: ₹2,300</p>
@@ -759,67 +775,67 @@
           </div>
         </div>
       </div>
-      <div class="course-sections">
+    </div>
 
-      <!-- Crash Course Section -->
-      <div class="course-section">
-        <div class="course-header">
-          <div class="course-icon">
-            <i class="fas fa-calendar-alt"></i>
-          </div>
-          <h2 class="course-title">Crash Course</h2>
-          <div class="course-highlight">
-            <i class="fas fa-star"></i> Best for Rapid and Accurate Preparation
+    <!-- Crash Course Section -->
+    <div class="course-section">
+      <div class="popular-ribbon">Effective</div>
+      <div class="course-header">
+        <div class="course-icon">
+          <i class="fas fa-bolt"></i>
+        </div>
+        <h2 class="course-title">Crash Course</h2>
+        <div class="course-highlight">
+          <i class="fas fa-star"></i> Best for Rapid Preparation
+        </div>
+      </div>
+      
+      <ul class="course-features">
+        <li>Premium online coaching (3-4 Months)</li>
+        <li>Live classes</li>
+        <li>e-Notes</li>
+        <li>Weekly assessments</li>
+        <li>Mock test</li>
+        <li>1-to-1 interaction</li>
+        <li>Trilingual session (English, Hindi & Bengali)</li>
+        <li>140+ Recorded Videos</li>
+        <li>Career Guidance</li>
+        <li>Top Ranked educators</li>          
+      </ul>
+      
+      <div class="price-container">
+        <div class="price-tag">
+          <span class="price-decoration left">✦</span>
+          <span class="original-price">₹1,499</span>
+          ₹549
+          <span class="price-decoration right">✦</span>
+          <span class="discount-badge">Save 64%</span>
+        </div>
+      </div>
+      
+      <div class="payment-options-container">
+        <div class="payment-option">
+          <p class="clickable" onclick="showQR('crash')">
+            <i class="fas fa-qrcode"></i> Pay with QR Code
+          </p>
+          <div id="qrImagecrash" class="hidden payment-details">
+            <div class="qr-image">
+              <img src="p_qr.jpeg" alt="Crash Course QR Code">
+            </div>
+            <p class="upi-text">Amount: ₹549</p>
+            <p class="timer"><i class="fas fa-clock"></i> Valid for: 15 minutes</p>
           </div>
         </div>
         
-        <ul class="course-features">
-          <li>Premium online coaching (3-4 Crucial Months)</li>
-          <li>live classes</li>
-          <li>e-Notes</li>
-          <li>Weekly assesments</li>
-          <li>Mock test</li>
-          <li>1-to-1 interaction</li>
-          <li>Trilingual session (English, Hindi & Bengali)</li>
-          <li>140+ Recorded Videos</li>
-          <li>Career Guidance</li>
-          <li>Top Ranked educators from Jadavpur University and NIPER SAS Nagar</li>          
-        </ul>
-        
-        <div class="price-container">
-          <div class="price-tag">
-            <span class="price-decoration left">✦</span>
-            <span class="original-price">₹1,499</span>
-            ₹549
-            <span class="price-decoration right">✦</span>
-            <span class="discount-badge">Save 64%</span>
-          </div>
-        </div>
-        
-        <div class="payment-options-container">
-          <div class="payment-option">
-            <p class="clickable" onclick="showQR('1year')">
-              <i class="fas fa-qrcode"></i> Pay with QR Code
-            </p>
-            <div id="qrImage1year" class="hidden payment-details">
-              <div class="qr-image">
-                <img src="p_qr.jpeg" alt="1 Year Course QR Code">
-              </div>
-              <p class="upi-text">Amount: ₹549</p>
-              <p class="timer"><i class="fas fa-clock"></i> Valid for: 15 minutes</p>
-            </div>
-          </div>
-          
-          <div class="payment-option">
-            <p class="clickable" onclick="showUPI('1year')">
-              <i class="fas fa-mobile-alt"></i> Pay via UPI
-            </p>
-            <div id="upiText1year" class="hidden payment-details">
-              <p class="upi-text">update soon! (Use QR Code)</p>
-              <p><strong>Recipient:</strong> GPAT_Gyan Official</p>
-              <p class="upi-text">Amount: ₹549</p>
-              <p class="timer"><i class="fas fa-clock"></i> Valid for: 15 minutes</p>
-            </div>
+        <div class="payment-option">
+          <p class="clickable" onclick="showUPI('crash')">
+            <i class="fas fa-mobile-alt"></i> Pay via UPI
+          </p>
+          <div id="upitextcrash" class="hidden payment-details">
+            <p class="upi-text">update soon! (Use QR Code)</p>
+            <p><strong>Recipient:</strong> GPAT_Gyan Official</p>
+            <p class="upi-text">Amount: ₹549</p>
+            <p class="timer"><i class="fas fa-clock"></i> Valid for: 15 minutes</p>
           </div>
         </div>
       </div>
@@ -854,10 +870,11 @@
       
       // Show the selected QR
       const qrElement = document.getElementById(`qrImage${courseType}`);
-      qrElement.classList.remove('hidden');
-      
-      // Scroll to the payment option
-      qrElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      if (qrElement) {
+        qrElement.classList.remove('hidden');
+        // Scroll to the payment option
+        qrElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
     }
 
     function showUPI(courseType) {
@@ -868,10 +885,18 @@
       
       // Show the selected UPI
       const upiElement = document.getElementById(`upiText${courseType}`);
-      upiElement.classList.remove('hidden');
-      
-      // Scroll to the payment option
-      upiElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      if (!upiElement) {
+        // Try lowercase version for crash course
+        const upiElementAlt = document.getElementById(`upitext${courseType}`);
+        if (upiElementAlt) {
+          upiElementAlt.classList.remove('hidden');
+          upiElementAlt.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      } else {
+        upiElement.classList.remove('hidden');
+        // Scroll to the payment option
+        upiElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
     }
     
     // Initialize interactive elements
