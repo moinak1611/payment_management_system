@@ -1,993 +1,656 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" sizes="32x32" href="logo.png">
-  <title>GPAT GYAN | PMS</title>
-  <style>
-    :root {
-      --cream-light: #FFF8F0;
-      --cream-dark: #F5E6D3;
-      --red-primary: #C41E3A;
-      --red-dark: #8A0C24;
-      --red-light: #F8E8EA;
-      --text-dark: #333333;
-      --text-light: #555555;
-      --gold-accent: #FFD700;
-      --green-accent: #4CAF50;
-      --blue-accent: #2196F3;
-      --purple-accent: #9C27B0;
-      --container-width: min(95%, 1200px);
-      --course-card-width: min(100%, 500px);
-      --payment-card-width: min(100%, 400px);
-    }
-    
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    
-    body {
-      font-family: 'Poppins', 'Georgia', serif;
-      background: linear-gradient(135deg, var(--cream-light), var(--cream-dark));
-      color: var(--text-dark);
-      line-height: 1.7;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-    
-    .container {
-      width: var(--container-width);
-      margin: 2rem auto;
-      background: white;
-      padding: clamp(1.5rem, 5vw, 3rem);
-      border-radius: 20px;
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
-      position: relative;
-      overflow: hidden;
-      border: 1px solid rgba(196, 30, 58, 0.1);
-      flex: 1;
-    }
-    
-    .container::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 12px;
-      height: 100%;
-      background: linear-gradient(to bottom, var(--red-primary), var(--red-dark));
-    }
-    
-    .logo-container {
-      text-align: center;
-      margin-bottom: 1.5rem;
-      position: relative;
-    }
-    
-    .logo {
-      height: auto;
-      width: min(100%, 200px);
-      margin-bottom: 1rem;
-      filter: drop-shadow(0 3px 6px rgba(0,0,0,0.1));
-    }
-    
-    h1 {
-      color: var(--red-primary);
-      margin-bottom: clamp(1.5rem, 5vw, 2.5rem);
-      font-weight: 800;
-      position: relative;
-      padding-bottom: 1rem;
-      text-align: center;
-      font-size: clamp(1.8rem, 6vw, 2.5rem);
-      text-shadow: 0 2px 4px rgba(0,0,0,0.05);
-      letter-spacing: -0.5px;
-    }
-    
-    h1::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 120px;
-      height: 5px;
-      background: linear-gradient(to right, var(--red-primary), var(--gold-accent));
-      border-radius: 3px;
-    }
-    
-    .course-sections {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 2rem;
-      margin: 3rem 0;
-    }
-    
-    .course-section {
-      flex: 1 1 var(--course-card-width);
-      min-width: 300px;
-      background: white;
-      border-radius: 18px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-      padding: 2rem;
-      position: relative;
-      overflow: hidden;
-      border: 1px solid rgba(196, 30, 58, 0.1);
-      z-index: 1;
-    }
-    
-    .course-section::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 5px;
-      background: linear-gradient(to right, var(--red-primary), var(--gold-accent));
-    }
-    
-    .course-header {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-bottom: 1.5rem;
-      position: relative;
-      z-index: 2;
-    }
-    
-    .course-icon {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      color: var(--gold-accent);
-      background: linear-gradient(135deg, var(--red-primary), var(--red-dark));
-      width: 70px;
-      height: 70px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      box-shadow: 0 5px 15px rgba(196, 30, 58, 0.2);
-    }
-    
-    .course-title {
-      font-size: clamp(1.5rem, 4vw, 1.8rem);
-      color: var(--red-dark);
-      font-weight: 700;
-      text-align: center;
-      margin-bottom: 0.5rem;
-    }
-    
-    .course-highlight {
-      background: linear-gradient(135deg, var(--red-primary), var(--red-dark));
-      color: white;
-      padding: 0.5rem 1.5rem;
-      border-radius: 50px;
-      font-weight: 600;
-      font-size: clamp(0.9rem, 3vw, 1.1rem);
-      display: inline-block;
-      margin: 0 auto 1.5rem;
-      box-shadow: 0 5px 15px rgba(196, 30, 58, 0.2);
-      text-align: center;
-    }
-    
-    .course-features {
-      list-style-type: none;
-      padding: 0;
-      margin: 2rem 0;
-    }
-    
-    .course-features li {
-      margin: 1rem 0;
-      padding: 1rem;
-      background: var(--red-light);
-      border-radius: 10px;
-      font-size: clamp(0.9rem, 3.5vw, 1rem);
-      position: relative;
-      display: flex;
-      align-items: center;
-      border-left: 4px solid var(--red-primary);
-    }
-    
-    .course-features li::before {
-      content: '\f00c';
-      font-family: 'Font Awesome 6 Free';
-      font-weight: 900;
-      color: var(--green-accent);
-      margin-right: 12px;
-      font-size: 1.2rem;
-    }
-    
-    .price-container {
-      text-align: center;
-      margin: 2rem 0;
-      position: relative;
-    }
-    
-    .price-tag {
-      font-size: clamp(1.8rem, 6vw, 2.5rem);
-      font-weight: 800;
-      color: var(--red-dark);
-      margin: 1rem 0;
-      position: relative;
-      display: inline-block;
-      padding: 0 2rem;
-      background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(196,30,58,0.05));
-      border-radius: 10px;
-    }
-    
-    .price-decoration {
-      position: absolute;
-      font-size: 1.5rem;
-      color: var(--gold-accent);
-      opacity: 0.7;
-    }
-    
-    .price-decoration.left {
-      left: 0;
-      top: 50%;
-      transform: translateY(-50%) rotate(-15deg);
-    }
-    
-    .price-decoration.right {
-      right: 0;
-      top: 50%;
-      transform: translateY(-50%) rotate(15deg);
-    }
-    
-    .original-price {
-      text-decoration: line-through;
-      color: var(--text-light);
-      font-size: 1.2rem;
-      margin-right: 0.8rem;
-      opacity: 0.7;
-    }
-    
-    .discount-badge {
-      background: var(--green-accent);
-      color: white;
-      padding: 0.3rem 1rem;
-      border-radius: 50px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      position: absolute;
-      top: -0.8rem;
-      right: -1.5rem;
-      transform: rotate(10deg);
-      box-shadow: 0 3px 10px rgba(76, 175, 80, 0.3);
-    }
-    
-    .payment-options-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1.5rem;
-      margin: 2.5rem 0 1.5rem;
-    }
-    
-    .payment-option {
-      flex: 1 1 var(--payment-card-width);
-      min-width: 280px;
-      padding: 1.5rem;
-      background: white;
-      border-radius: 15px;
-      transition: all 0.4s ease;
-      border: 1px solid rgba(196, 30, 58, 0.1);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.05);
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .payment-option:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 30px rgba(196, 30, 58, 0.15);
-    }
-    
-    .payment-option::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 5px;
-      height: 100%;
-      background: linear-gradient(to bottom, var(--gold-accent), var(--red-primary));
-    }
-    
-    .clickable {
-      cursor: pointer;
-      font-weight: 700;
-      color: var(--red-primary);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      font-size: clamp(1.1rem, 3.5vw, 1.2rem);
-      padding: 1rem;
-      transition: all 0.3s;
-      background: rgba(196, 30, 58, 0.05);
-      border-radius: 10px;
-      margin: 0;
-    }
-    
-    .clickable:hover {
-      color: var(--red-dark);
-      background: rgba(196, 30, 58, 0.1);
-    }
-    
-    .clickable i {
-      margin-right: 1rem;
-      font-size: clamp(1.2rem, 3.5vw, 1.4rem);
-      color: var(--red-dark);
-    }
-    
-    .hidden {
-      display: none;
-    }
-    
-    .footer {
-      margin-top: auto;
-      padding: 1.5rem;
-      font-size: clamp(0.6rem, 2.5vw, 0.8rem);
-      background: linear-gradient(to right, var(--red-dark), var(--red-primary));
-      color: white;
-      text-align: center;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.2);
-      width: 100%;
-    }
-    
-    .security-badge {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 2rem 0;
-      color: var(--text-dark);
-      font-size: clamp(0.9rem, 3vw, 1rem);
-      background: white;
-      padding: 1rem 1.5rem;
-      border-radius: 50px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-      border: 1px solid rgba(196, 30, 58, 0.1);
-    }
-    
-    .security-badge i {
-      color: var(--gold-accent);
-      margin-right: 1rem;
-      font-size: clamp(1.2rem, 4vw, 1.5rem);
-      text-shadow: 0 2px 3px rgba(0,0,0,0.1);
-    }
-    
-    .form-container {
-      text-align: center;
-      margin: 2.5rem 0;
-    }
-    
-    .form-button {
-      padding: clamp(1rem, 4vw, 1.2rem) clamp(2rem, 5vw, 3rem);
-      background: linear-gradient(to right, var(--red-primary), var(--red-dark));
-      color: white;
-      border: none;
-      border-radius: 50px;
-      font-size: clamp(1rem, 3.5vw, 1.2rem);
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      margin: 1.5rem 0;
-      width: 100%;
-      max-width: 450px;
-      box-shadow: 0 5px 20px rgba(196, 30, 58, 0.3);
-      position: relative;
-      overflow: hidden;
-      letter-spacing: 0.5px;
-    }
-    
-    .form-button:hover {
-      transform: translateY(-5px) scale(1.03);
-      box-shadow: 0 10px 30px rgba(196, 30, 58, 0.4);
-    }
-    
-    .form-button:active {
-      transform: translateY(2px);
-    }
-    
-    .form-button::after {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(
-        to bottom right,
-        rgba(255,255,255,0) 0%,
-        rgba(255,255,255,0) 45%,
-        rgba(255,255,255,0.5) 48%,
-        rgba(255,255,255,0) 52%,
-        rgba(255,255,255,0) 100%
-      );
-      transform: rotate(30deg);
-      transition: all 0.6s ease;
-    }
-    
-    .form-button:hover::after {
-      left: 100%;
-      top: 100%;
-    }
-    
-    .form-button i {
-      margin-right: 1rem;
-      font-size: 1.3rem;
-    }
-    
-    .payment-details {
-      margin-top: 1.5rem;
-      padding: 1.5rem;
-      background: white;
-      border-radius: 12px;
-      border: 1px solid rgba(196, 30, 58, 0.15);
-      text-align: center;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    }
-    
-    .upi-text {
-      font-family: 'Courier New', monospace;
-      font-size: clamp(1rem, 3.5vw, 1.2rem);
-      font-weight: 700;
-      color: var(--text-dark);
-      margin: 0.5rem 0;
-      word-break: break-all;
-    }
-    
-    .qr-image {
-      border: 1px solid rgba(196, 30, 58, 0.1);
-      padding: 1.5rem;
-      background: white;
-      max-width: 100%;
-      margin: 0 auto;
-      border-radius: 12px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    }
-    
-    .qr-image img {
-      width: 100%;
-      max-width: 250px;
-      height: auto;
-      border-radius: 8px;
-    }
-    
-    .timer {
-      font-size: clamp(0.9rem, 3vw, 1rem);
-      color: var(--text-light);
-      margin-top: 1rem;
-      font-style: italic;
-    }
-    
-    .instructions {
-      background: var(--red-light);
-      padding: clamp(1.5rem, 4vw, 2rem);
-      border-radius: 15px;
-      margin: clamp(1.5rem, 5vw, 2.5rem) 0;
-      border-left: 6px solid var(--red-primary);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .instructions h3 {
-      font-size: clamp(1.3rem, 4vw, 1.6rem);
-      margin-bottom: 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--red-dark);
-      position: relative;
-    }
-    
-    .instructions h3 i {
-      margin-right: 1rem;
-      color: var(--red-primary);
-      font-size: 1.8rem;
-    }
-    
-    .instructions ol {
-      text-align: left;
-      padding-left: clamp(1rem, 5vw, 2rem);
-      font-size: clamp(0.95rem, 3.5vw, 1.1rem);
-      position: relative;
-      z-index: 1;
-    }
-    
-    .instructions li {
-      margin-bottom: 1rem;
-      position: relative;
-      padding-left: 1.5rem;
-    }
-    
-    .instructions li::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0.7rem;
-      width: 10px;
-      height: 10px;
-      background: var(--red-primary);
-      border-radius: 50%;
-    }
-    
-    .popular-ribbon {
-      position: absolute;
-      top: 20px;
-      right: -50px;
-      background: var(--gold-accent);
-      color: var(--red-dark);
-      padding: 0.5rem 4rem;
-      font-size: 0.9rem;
-      font-weight: 800;
-      transform: rotate(45deg);
-      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-      z-index: 2;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    
-    .guarantee-badge {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 2rem auto;
-      padding: 1rem;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-      max-width: 500px;
-      border: 1px dashed var(--gold-accent);
-    }
-    
-    .guarantee-badge i {
-      color: var(--gold-accent);
-      font-size: 2rem;
-      margin-right: 1rem;
-    }
-    
-    .guarantee-text {
-      font-size: clamp(0.9rem, 3vw, 1rem);
-      font-weight: 500;
-    }
-    
-    /* Ripple effect for buttons */
-    .ripple {
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.5);
-      transform: scale(0);
-      animation: ripple-animation 0.6s linear;
-    }
-    
-    @keyframes ripple-animation {
-      to {
-        transform: scale(4);
-        opacity: 0;
-      }
-    }
-    
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-      .course-sections {
-        flex-direction: column;
-        align-items: center;
-      }
-      
-      .course-section {
-        width: 100%;
-      }
-      
-      .payment-options-container {
-        flex-direction: column;
-        align-items: center;
-      }
-      
-      .popular-ribbon {
-        right: -60px;
-        padding: 0.4rem 3.5rem;
-        font-size: 0.8rem;
-      }
-    }
-    
-    @media (max-width: 480px) {
-      .container {
-        padding: 1.5rem;
-      }
-      
-      .course-section {
-        padding: 1.5rem;
-      }
-      
-      .price-tag {
-        padding: 0 1.5rem;
-      }
-      
-      .discount-badge {
-        right: -1rem;
-        top: -1rem;
-      }
-      
-      .popular-ribbon {
-        right: -70px;
-        padding: 0.3rem 3rem;
-        font-size: 0.7rem;
-      }
-    }
-  </style>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Georgia:wght@400;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GPAT GYAN | Admissions & Payments</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root{
+    --cream:#FBF4E8;
+    --paper:#FFFFFF;
+    --ink:#241813;
+    --ink-soft:#6B5B52;
+    --red:#B3122A;
+    --red-deep:#6E0A1B;
+    --gold:#B8862E;
+    --live:#2F7A5C;
+    --live-bg:#E7F3ED;
+    --line:rgba(36,24,19,0.12);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+  }
+  .mono{font-family:'JetBrains Mono',monospace;}
+  .display{font-family:'Fraunces',serif;}
+
+  /* ---------- Pulse ticker ---------- */
+  .pulse-bar{
+    background:var(--ink);
+    color:var(--cream);
+    padding:0.65rem 1rem;
+    display:flex;
+    flex-wrap:wrap;
+    gap:0.4rem 1.6rem;
+    justify-content:center;
+    align-items:center;
+    font-size:0.85rem;
+    letter-spacing:0.02em;
+    position:sticky;
+    top:0;
+    z-index:50;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  .pulse-item{display:flex;align-items:center;gap:0.5rem;}
+  .pulse-dot{
+    width:8px;height:8px;border-radius:50%;
+    background:var(--live);
+    box-shadow:0 0 0 0 rgba(47,122,92,0.6);
+    animation:pulseGlow 2s infinite;
+  }
+  @keyframes pulseGlow{
+    0%{box-shadow:0 0 0 0 rgba(47,122,92,0.55);}
+    70%{box-shadow:0 0 0 7px rgba(47,122,92,0);}
+    100%{box-shadow:0 0 0 0 rgba(47,122,92,0);}
+  }
+  .pulse-num{font-family:'JetBrains Mono',monospace;font-weight:700;color:#fff;}
+
+  /* ---------- Shell ---------- */
+  .wrap{max-width:1180px;margin:0 auto;padding:0 1.25rem;}
+  header.top{padding:2.75rem 0 1.5rem;text-align:center;}
+  .brand-row{display:flex;align-items:center;justify-content:center;gap:0.9rem;margin-bottom:0.6rem;}
+  .brand-mark{
+    width:44px;height:44px;border-radius:10px;
+    background:linear-gradient(160deg,var(--red),var(--red-deep));
+    display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.2rem;
+    box-shadow:0 6px 16px rgba(110,10,27,0.28);
+  }
+  .brand-name{font-family:'Fraunces',serif;font-weight:700;font-size:1.35rem;letter-spacing:0.01em;}
+  .brand-name span{color:var(--red);}
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:900;
+    font-size:clamp(1.9rem,4.4vw,2.9rem);
+    letter-spacing:-0.01em;
+    max-width:760px;margin:0 auto 0.75rem;
+  }
+  .subhead{color:var(--ink-soft);font-size:1.02rem;max-width:560px;margin:0 auto;}
+
+  .security-line{
+    display:inline-flex;align-items:center;gap:0.55rem;
+    margin:1.5rem auto 0;
+    background:var(--paper);
+    border:1px solid var(--line);
+    padding:0.55rem 1.1rem;border-radius:999px;
+    font-size:0.85rem;color:var(--ink-soft);
+  }
+  .security-line i{color:var(--gold);}
+
+  /* ---------- Steps strip ---------- */
+  .steps{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    border-radius:14px;overflow:hidden;
+    margin:2.25rem 0;
+  }
+  .step{background:var(--paper);padding:1.35rem 1.25rem;}
+  .step-label{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--red);letter-spacing:0.08em;text-transform:uppercase;}
+  .step p{font-size:0.92rem;margin-top:0.35rem;color:var(--ink-soft);}
+  .step strong{color:var(--ink);}
+
+  /* ---------- Course cards ---------- */
+  .courses{display:flex;flex-wrap:wrap;gap:1.5rem;margin:1rem 0 2.5rem;}
+  .course{
+    flex:1 1 460px;min-width:290px;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:1.9rem;
+    position:relative;
+    overflow:hidden;
+  }
+  .course::before{
+    content:'';position:absolute;top:0;left:0;width:100%;height:4px;
+    background:linear-gradient(90deg,var(--red),var(--gold));
+  }
+  .tag{
+    position:absolute;top:1.4rem;right:1.4rem;
+    background:var(--live-bg);color:var(--live);
+    font-size:0.72rem;font-weight:700;letter-spacing:0.05em;
+    padding:0.3rem 0.7rem;border-radius:999px;text-transform:uppercase;
+  }
+  .course-head{margin-bottom:1.1rem;padding-right:5rem;}
+  .course-icon{
+    width:46px;height:46px;border-radius:10px;
+    background:linear-gradient(160deg,var(--red),var(--red-deep));
+    color:#fff;display:flex;align-items:center;justify-content:center;
+    font-size:1.15rem;margin-bottom:0.9rem;
+  }
+  .course h2{font-family:'Fraunces',serif;font-size:1.35rem;font-weight:700;margin-bottom:0.3rem;}
+  .course .kicker{color:var(--ink-soft);font-size:0.88rem;}
+
+  .course ul{list-style:none;margin:1.25rem 0;}
+  .course li{
+    display:flex;gap:0.6rem;align-items:flex-start;
+    font-size:0.9rem;padding:0.5rem 0;
+    border-bottom:1px dashed var(--line);
+  }
+  .course li:last-child{border-bottom:none;}
+  .course li i{color:var(--live);margin-top:0.2rem;font-size:0.85rem;}
+
+  .price-row{
+    display:flex;align-items:baseline;gap:0.7rem;
+    padding-top:0.75rem;margin-top:0.5rem;border-top:1px solid var(--line);
+  }
+  .price-now{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.7rem;color:var(--red-deep);}
+  .price-was{font-family:'JetBrains Mono',monospace;text-decoration:line-through;color:var(--ink-soft);font-size:1rem;}
+  .price-off{
+    margin-left:auto;background:var(--live-bg);color:var(--live);
+    font-family:'JetBrains Mono',monospace;font-weight:700;font-size:0.78rem;
+    padding:0.25rem 0.6rem;border-radius:6px;
+  }
+  .interest-note{font-size:0.78rem;color:var(--ink-soft);margin-top:0.5rem;}
+  .interest-note .mono{color:var(--red);}
+
+  .pay-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;margin-top:1.2rem;}
+  .pay-btn{
+    border:1px solid var(--line);background:var(--cream);
+    border-radius:10px;padding:0.85rem;text-align:center;
+    font-weight:600;font-size:0.9rem;cursor:pointer;
+    display:flex;flex-direction:column;align-items:center;gap:0.4rem;
+    transition:all 0.2s ease;color:var(--ink);
+  }
+  .pay-btn:hover{border-color:var(--red);background:#fff;}
+  .pay-btn i{font-size:1.15rem;color:var(--red-deep);}
+  .pay-panel{
+    display:none;margin-top:1rem;padding:1.25rem;
+    background:var(--cream);border:1px solid var(--line);border-radius:12px;text-align:center;
+  }
+  .pay-panel.show{display:block;}
+  .pay-panel img{width:100%;max-width:190px;border-radius:8px;border:1px solid var(--line);margin-bottom:0.9rem;}
+  .order-ref{
+    font-family:'JetBrains Mono',monospace;font-size:0.95rem;font-weight:700;
+    background:#fff;border:1px dashed var(--line);border-radius:8px;
+    padding:0.5rem 0.8rem;display:inline-block;margin:0.4rem 0;
+  }
+  .upi-link{
+    display:inline-flex;align-items:center;gap:0.5rem;
+    background:var(--red);color:#fff;font-weight:600;font-size:0.9rem;
+    padding:0.7rem 1.1rem;border-radius:8px;text-decoration:none;margin-top:0.6rem;
+  }
+  .fine{font-size:0.76rem;color:var(--ink-soft);margin-top:0.7rem;}
+
+  .verify-block{
+    text-align:center;background:var(--paper);border:1px solid var(--line);
+    border-radius:16px;padding:2rem 1.5rem;margin:2.5rem 0;
+  }
+  .verify-btn{
+    display:inline-flex;align-items:center;gap:0.6rem;
+    background:linear-gradient(135deg,var(--red),var(--red-deep));
+    color:#fff;font-weight:700;padding:1rem 2.1rem;border-radius:999px;
+    text-decoration:none;font-size:1.02rem;box-shadow:0 10px 24px rgba(110,10,27,0.25);
+  }
+
+  footer{
+    background:var(--ink);color:var(--cream);text-align:center;
+    padding:1.75rem 1rem;font-size:0.82rem;margin-top:3rem;
+  }
+  footer a{color:var(--cream);opacity:0.75;text-decoration:underline;cursor:pointer;background:none;border:none;font-size:0.82rem;font-family:inherit;}
+
+  /* ---------- Admin overlay ---------- */
+  .overlay{
+    position:fixed;inset:0;background:rgba(36,24,19,0.55);
+    display:none;align-items:center;justify-content:center;z-index:200;padding:1rem;
+  }
+  .overlay.show{display:flex;}
+  .admin-box{
+    background:#fff;border-radius:16px;max-width:760px;width:100%;
+    max-height:88vh;overflow-y:auto;padding:1.75rem;
+  }
+  .admin-box h2{font-family:'Fraunces',serif;font-size:1.4rem;margin-bottom:0.3rem;}
+  .admin-close{float:right;background:none;border:none;font-size:1.3rem;cursor:pointer;color:var(--ink-soft);}
+  .admin-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:0.8rem;margin:1.25rem 0;}
+  .stat-card{background:var(--cream);border-radius:10px;padding:0.9rem;text-align:center;}
+  .stat-card .num{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.5rem;color:var(--red-deep);}
+  .stat-card .lab{font-size:0.72rem;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.04em;margin-top:0.2rem;}
+  table.admin-table{width:100%;border-collapse:collapse;font-size:0.85rem;margin-top:0.5rem;}
+  table.admin-table th,table.admin-table td{text-align:left;padding:0.5rem 0.4rem;border-bottom:1px solid var(--line);}
+  table.admin-table th{color:var(--ink-soft);font-weight:600;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.04em;}
+  .admin-refresh{
+    background:var(--ink);color:#fff;border:none;padding:0.55rem 1rem;
+    border-radius:8px;font-size:0.82rem;cursor:pointer;margin-bottom:0.5rem;
+  }
+  .admin-pass{width:100%;padding:0.7rem;border:1px solid var(--line);border-radius:8px;font-size:0.95rem;margin:0.8rem 0;}
+  .admin-note{font-size:0.75rem;color:var(--ink-soft);margin-top:1rem;line-height:1.5;}
+
+  @media(max-width:720px){.steps{grid-template-columns:1fr;}.pulse-bar{font-size:0.76rem;gap:0.3rem 1rem;}}
+</style>
 </head>
 <body>
-  <div class="container">
-    <div class="logo-container">
-      <img src="logo.png" alt="GPAT Gyan Logo" class="logo">  
-    </div>
-    
-    <h1><i class="fas fa-graduation-cap"></i> Payment Management System (PMS)</h1>
-    <div class="security-badge">
-      <i class="fas fa-shield-alt"></i>
-      <span>Secured Payment Gateway</span>
-    </div>
-    
-    <div class="instructions">
-      <h3><i class="fas fa-lightbulb"></i> How To Enroll in 3 Simple Steps</h3>
-      <ol>
-        <li><strong>Select</strong> your preferred course below</li>
-        <li><strong>Choose</strong> your payment method (QR or UPI)</li>
-        <li><strong>Complete</strong> payment and verify immediately</li>
-      </ol>
-    </div>
-    
-    <div class="guarantee-badge">
-      <i class="fas fa-medal"></i>
-      <div class="guarantee-text">
-        <strong>GPAT GYAN: Cheers for the success</strong>
+
+  <div class="pulse-bar" id="pulseBar">
+    <div class="pulse-item"><span class="pulse-dot"></span><span>Live on this page: <span class="pulse-num" id="statActive">–</span></span></div>
+    <div class="pulse-item"><i class="fas fa-eye"></i><span>Visits today: <span class="pulse-num" id="statVisitsToday">–</span></span></div>
+    <div class="pulse-item"><i class="fas fa-inbox"></i><span>Payment attempts today: <span class="pulse-num" id="statPaysToday">–</span></span></div>
+  </div>
+
+  <div class="wrap">
+    <header class="top">
+      <div class="brand-row">
+        <div class="brand-mark"><i class="fas fa-mortar-board"></i></div>
+        <div class="brand-name">GPAT<span>_</span>GYAN</div>
       </div>
-    </div>
-    
-    <div class="course-sections">
-      <!-- 1 Year Course Section -->
-      <div class="course-section">
-        <div class="course-header">
-          <div class="course-icon">
-            <i class="fas fa-calendar-alt"></i>
-          </div>
-          <h2 class="course-title">1 Year Comprehensive Course</h2>
-          <div class="course-highlight">
-            <i class="fas fa-star"></i> Best for Focused Preparation
-          </div>
-        </div>
-        
-        <ul class="course-features">
-          <li>Premium online coaching (1 Year online class)</li>
-          <li>Live classes</li>
-          <li>Recorded Videos</li>
-          <li>e-Notes</li>
-          <li>Weekly assessments</li>
-          <li>Mock test</li>
-          <li>1-to-1 interaction</li>
-          <li>Trilingual session (English, Hindi & Bengali)</li>
-          <li>Exclusive lecture library (250+ videos)</li>
-          <li>GPAT qualified rankers & trusted educators</li>         
-        </ul>
-        
-        <div class="price-container">
-          <div class="price-tag">
-            <span class="price-decoration left">✦</span>
-            <span class="original-price">₹7,000</span>
-            ₹2,549
-            <span class="price-decoration right">✦</span>
-            <span class="discount-badge">64%</span>
-          </div>
-        </div>
-        
-        <div class="payment-options-container">
-          <div class="payment-option">
-            <p class="clickable" onclick="showQR('1year')">
-              <i class="fas fa-qrcode"></i> Pay with QR Code
-            </p>
-            <div id="qrImage1year" class="hidden payment-details">
-              <div class="qr-image">
-                <img src="p_qr.jpeg" alt="1 Year Course QR Code">
-              </div>
-              <p class="upi-text">₹2,549</p>
-              <p class="timer"><i class="fas fa-clock"></i> Valid for: 15 minutes</p>
-            </div>
-          </div>
-          
-          <div class="payment-option">
-            <p class="clickable" onclick="showUPI('1year')">
-              <i class="fas fa-mobile-alt"></i> Pay via UPI
-            </p>
-            <div id="upiText1year" class="hidden payment-details">
-              <p class="upi-text">update soon! (Use QR Code)</p>
-              <p><strong>Recipient:</strong> GPAT_GYAN Official</p>
-              <p class="upi-text">Amount: ₹2,549</p>
-              <p class="timer"><i class="fas fa-clock"></i> Valid for: 15 minutes</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- 2 Year Course Section -->
-      <div class="course-section" style="position: relative;">
-        <div class="popular-ribbon">Popular</div>
-        <div class="course-header">
-          <div class="course-icon">
-            <i class="fas fa-calendar-check"></i>
-          </div>
-          <h2 class="course-title">2 Year Extended Course</h2>
-          <div class="course-highlight">
-            <i class="fas fa-trophy"></i> Best Value Package
-          </div>
-        </div>
-        
-        <ul class="course-features">
-          <li><strong>Everything in 1 Year Course</strong></li>
-          <li>Additional 1 year extended access</li>
-          <li>Personalized 1-on-1 mentorship</li>
-          <li>Priority doubt resolution</li>
-          <li>Subject specific guide</li>
-          <li>Exclusive lecture library (250+ videos)</li>
-          <li>Live interactive sessions with toppers</li>
-        </ul>
-        
-        <div class="price-container">
-          <div class="price-tag">
-            <span class="price-decoration left">✦</span>
-            <span class="original-price">₹10,000</span>
-            ₹3,749
-            <span class="price-decoration right">✦</span>
-            <span class="discount-badge">63%</span>
-          </div>
-        </div>
-        
-        <div class="payment-options-container">
-          <div class="payment-option">
-            <p class="clickable" onclick="showQR('2year')">
-              <i class="fas fa-qrcode"></i> Pay with QR Code
-            </p>
-            <div id="qrImage2year" class="hidden payment-details">
-              <div class="qr-image">
-                <img src="p_qr.jpeg" alt="2 Year Course QR Code">
-              </div>
-              <p class="upi-text">₹3,749</p>
-              <p class="timer"><i class="fas fa-clock"></i> Valid for: 15 minutes</p>
-            </div>
-          </div>
-          
-          <div class="payment-option">
-            <p class="clickable" onclick="showUPI('2year')">
-              <i class="fas fa-mobile-alt"></i> Pay via UPI
-            </p>
-            <div id="upiText2year" class="hidden payment-details">
-              <p class="upi-text">update soon! (Use QR Code)</p>
-              <p><strong>Recipient:</strong> GPAT_GYAN Official</p>
-              <p class="upi-text">Amount: ₹3,749</p>
-              <p class="timer"><i class="fas fa-clock"></i> Valid for: 15 minutes</p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <h1>Admissions &amp; Payments Desk</h1>
+      <p class="subhead">Choose a batch, pay by QR or UPI, then confirm with the verification form. Every visit and payment click on this page is logged in real time below.</p>
+      <div class="security-line"><i class="fas fa-shield-halved"></i><span>Manually verified payments · UPI &amp; QR accepted</span></div>
+    </header>
+
+    <div class="steps">
+      <div class="step"><div class="step-label">01 · Select</div><p><strong>Pick your course</strong> from the cards below — 1&nbsp;Year, 2&nbsp;Year, or a recorded batch.</p></div>
+      <div class="step"><div class="step-label">02 · Pay</div><p><strong>Scan the QR or open UPI</strong> directly from your phone. An order reference is generated for you.</p></div>
+      <div class="step"><div class="step-label">03 · Confirm</div><p><strong>Submit the verification form</strong> with your order reference so we can activate access.</p></div>
     </div>
 
-    <!-- Crash Course Section -->
-    <div class="course-section">
-      <div class="popular-ribbon">Popular</div>
-      <div class="course-header">
-        <div class="course-icon">
-          <i class="fas fa-bolt"></i>
+    <div class="courses" id="courseGrid">
+
+      <div class="course" data-course="1year" data-price="2549">
+        <span class="tag">Focused prep</span>
+        <div class="course-head">
+          <div class="course-icon"><i class="fas fa-calendar-days"></i></div>
+          <h2>1 Year Comprehensive Course</h2>
+          <div class="kicker">Live + recorded · trilingual sessions</div>
         </div>
-        <h2 class="course-title">Mission Drug Inspector (Recorded Batch)</h2>
-        <div class="course-highlight">
-          <i class="fas fa-star"></i> Best for Rapid Preparation
+        <ul>
+          <li><i class="fas fa-check"></i>1 year live online classes + recordings</li>
+          <li><i class="fas fa-check"></i>e-Notes, weekly assessments &amp; mock tests</li>
+          <li><i class="fas fa-check"></i>1-to-1 doubt sessions</li>
+          <li><i class="fas fa-check"></i>English, Hindi &amp; Bengali sessions</li>
+          <li><i class="fas fa-check"></i>250+ video lecture library</li>
+        </ul>
+        <div class="price-row">
+          <span class="price-was">₹7,000</span>
+          <span class="price-now">₹2,549</span>
+          <span class="price-off">64% off</span>
         </div>
-      </div>
-      
-      <ul class="course-features">
-        <li>200+ Recorded Video Lectures</li>
-        <li>100% Syllabus Coverage</li>
-        <li>Good Worklife Balance</li>
-        <li>Dedicated Lecture Library</li>
-        <li>Educator Guidance for Every Doubt</li>
-        <li>24/7 Online Access, Unlimited Attempts</li>
-        <li>Mock Tests</li>
-        <li>7+ qualified educators from Jadavpur University, Kolkata & NIPER SAS Nagar</li>
-        <li>Career Guidance</li>
-        <li>Top Ranked educators</li>
-        <li>Valid Till June, 2027</li>         
-      </ul>
-      
-      <div class="price-container">
-        <div class="price-tag">
-          <span class="price-decoration left">✦</span>
-          <span class="original-price">₹2,500</span>
-          ₹600
-          <span class="price-decoration right">✦</span>
-          <span class="discount-badge">76%</span>
+        <p class="interest-note"><span class="mono" data-course-views="1year">0</span> people have viewed this batch</p>
+        <div class="pay-grid">
+          <button class="pay-btn" data-action="qr" data-course="1year"><i class="fas fa-qrcode"></i>Pay by QR</button>
+          <button class="pay-btn" data-action="upi" data-course="1year"><i class="fas fa-mobile-screen"></i>Pay by UPI</button>
         </div>
-      </div>
-      
-      <div class="payment-options-container">
-        <div class="payment-option">
-          <p class="clickable" onclick="showQR('crash')">
-            <i class="fas fa-qrcode"></i> Pay with QR Code
-          </p>
-          <div id="qrImagecrash" class="hidden payment-details">
-            <div class="qr-image">
-              <img src="p_qr.jpeg" alt="Crash Course QR Code">
-            </div>
-            <p class="upi-text">Amount: ₹600</p>
-            <p class="timer"><i class="fas fa-clock"></i> Valid for: 15 minutes</p>
-          </div>
+        <div class="pay-panel" data-panel="1year-qr">
+          <img src="p_qr.jpeg" alt="1 Year course QR code">
+          <div>Amount: <strong>₹2,549</strong></div>
+          <div class="order-ref" data-ref="1year-qr">REF —</div>
+          <p class="fine">Scan, pay, then screenshot the confirmation for the form.</p>
         </div>
-        
-        <div class="payment-option">
-          <p class="clickable" onclick="showUPI('crash')">
-            <i class="fas fa-mobile-alt"></i> Pay via UPI
-          </p>
-          <div id="upitextcrash" class="hidden payment-details">
-            <p class="upi-text">update soon! (Use QR Code)</p>
-            <p><strong>Recipient:</strong> GPAT_GYAN Official</p>
-            <p class="upi-text">Amount: ₹600</p>
-            <p class="timer"><i class="fas fa-clock"></i> Valid for: 15 minutes</p>
-          </div>
+        <div class="pay-panel" data-panel="1year-upi">
+          <div>Recipient: <strong>GPAT_GYAN Official</strong></div>
+          <div>Amount: <strong>₹2,549</strong></div>
+          <div class="order-ref" data-ref="1year-upi">REF —</div>
+          <a class="upi-link" data-upi-link="1year-upi" href="#"><i class="fas fa-arrow-up-right-from-square"></i>Open in UPI app</a>
+          <p class="fine">On desktop this link won't open an app — use the QR option instead.</p>
         </div>
       </div>
+
+      <div class="course" data-course="2year" data-price="3749">
+        <span class="tag">Best value</span>
+        <div class="course-head">
+          <div class="course-icon"><i class="fas fa-calendar-check"></i></div>
+          <h2>2 Year Extended Course</h2>
+          <div class="kicker">Everything in 1-Year, plus mentorship</div>
+        </div>
+        <ul>
+          <li><i class="fas fa-check"></i>Everything in the 1 Year course</li>
+          <li><i class="fas fa-check"></i>Extra year of access</li>
+          <li><i class="fas fa-check"></i>Personal 1-on-1 mentorship</li>
+          <li><i class="fas fa-check"></i>Priority doubt resolution</li>
+          <li><i class="fas fa-check"></i>Live sessions with toppers</li>
+        </ul>
+        <div class="price-row">
+          <span class="price-was">₹10,000</span>
+          <span class="price-now">₹3,749</span>
+          <span class="price-off">63% off</span>
+        </div>
+        <p class="interest-note"><span class="mono" data-course-views="2year">0</span> people have viewed this batch</p>
+        <div class="pay-grid">
+          <button class="pay-btn" data-action="qr" data-course="2year"><i class="fas fa-qrcode"></i>Pay by QR</button>
+          <button class="pay-btn" data-action="upi" data-course="2year"><i class="fas fa-mobile-screen"></i>Pay by UPI</button>
+        </div>
+        <div class="pay-panel" data-panel="2year-qr">
+          <img src="p_qr.jpeg" alt="2 Year course QR code">
+          <div>Amount: <strong>₹3,749</strong></div>
+          <div class="order-ref" data-ref="2year-qr">REF —</div>
+          <p class="fine">Scan, pay, then screenshot the confirmation for the form.</p>
+        </div>
+        <div class="pay-panel" data-panel="2year-upi">
+          <div>Recipient: <strong>GPAT_GYAN Official</strong></div>
+          <div>Amount: <strong>₹3,749</strong></div>
+          <div class="order-ref" data-ref="2year-upi">REF —</div>
+          <a class="upi-link" data-upi-link="2year-upi" href="#"><i class="fas fa-arrow-up-right-from-square"></i>Open in UPI app</a>
+          <p class="fine">On desktop this link won't open an app — use the QR option instead.</p>
+        </div>
+      </div>
+
+      <div class="course" data-course="crash" data-price="600">
+        <span class="tag">Rapid prep</span>
+        <div class="course-head">
+          <div class="course-icon"><i class="fas fa-bolt"></i></div>
+          <h2>Mission Drug Inspector — Recorded</h2>
+          <div class="kicker">200+ lectures · valid till June 2027</div>
+        </div>
+        <ul>
+          <li><i class="fas fa-check"></i>200+ recorded lectures, full syllabus</li>
+          <li><i class="fas fa-check"></i>24/7 access, unlimited attempts</li>
+          <li><i class="fas fa-check"></i>Mock tests &amp; career guidance</li>
+          <li><i class="fas fa-check"></i>Educators from Jadavpur University &amp; NIPER SAS Nagar</li>
+        </ul>
+        <div class="price-row">
+          <span class="price-was">₹2,500</span>
+          <span class="price-now">₹600</span>
+          <span class="price-off">76% off</span>
+        </div>
+        <p class="interest-note"><span class="mono" data-course-views="crash">0</span> people have viewed this batch</p>
+        <div class="pay-grid">
+          <button class="pay-btn" data-action="qr" data-course="crash"><i class="fas fa-qrcode"></i>Pay by QR</button>
+          <button class="pay-btn" data-action="upi" data-course="crash"><i class="fas fa-mobile-screen"></i>Pay by UPI</button>
+        </div>
+        <div class="pay-panel" data-panel="crash-qr">
+          <img src="p_qr.jpeg" alt="Crash course QR code">
+          <div>Amount: <strong>₹600</strong></div>
+          <div class="order-ref" data-ref="crash-qr">REF —</div>
+          <p class="fine">Scan, pay, then screenshot the confirmation for the form.</p>
+        </div>
+        <div class="pay-panel" data-panel="crash-upi">
+          <div>Recipient: <strong>GPAT_GYAN Official</strong></div>
+          <div>Amount: <strong>₹600</strong></div>
+          <div class="order-ref" data-ref="crash-upi">REF —</div>
+          <a class="upi-link" data-upi-link="crash-upi" href="#"><i class="fas fa-arrow-up-right-from-square"></i>Open in UPI app</a>
+          <p class="fine">On desktop this link won't open an app — use the QR option instead.</p>
+        </div>
+      </div>
+
+      <div class="course" data-course="recorded" data-price="550">
+        <span class="tag">Super fast</span>
+        <div class="course-head">
+          <div class="course-icon"><i class="fas fa-rocket"></i></div>
+          <h2>Mission Govt. Pharmacist Exam — Recorded</h2>
+          <div class="kicker">200+ lectures · valid till June 2027</div>
+        </div>
+        <ul>
+          <li><i class="fas fa-check"></i>200+ recorded lectures, full syllabus</li>
+          <li><i class="fas fa-check"></i>24/7 access, unlimited attempts</li>
+          <li><i class="fas fa-check"></i>Mock tests included</li>
+          <li><i class="fas fa-check"></i>Educators from Jadavpur University &amp; NIPER SAS Nagar</li>
+        </ul>
+        <div class="price-row">
+          <span class="price-was">₹2,000</span>
+          <span class="price-now">₹550</span>
+          <span class="price-off">72.5% off</span>
+        </div>
+        <p class="interest-note"><span class="mono" data-course-views="recorded">0</span> people have viewed this batch</p>
+        <div class="pay-grid">
+          <button class="pay-btn" data-action="qr" data-course="recorded"><i class="fas fa-qrcode"></i>Pay by QR</button>
+          <button class="pay-btn" data-action="upi" data-course="recorded"><i class="fas fa-mobile-screen"></i>Pay by UPI</button>
+        </div>
+        <div class="pay-panel" data-panel="recorded-qr">
+          <img src="p_qr.jpeg" alt="Recorded course QR code">
+          <div>Amount: <strong>₹550</strong></div>
+          <div class="order-ref" data-ref="recorded-qr">REF —</div>
+          <p class="fine">Scan, pay, then screenshot the confirmation for the form.</p>
+        </div>
+        <div class="pay-panel" data-panel="recorded-upi">
+          <div>Recipient: <strong>GPAT_GYAN Official</strong></div>
+          <div>Amount: <strong>₹550</strong></div>
+          <div class="order-ref" data-ref="recorded-upi">REF —</div>
+          <a class="upi-link" data-upi-link="recorded-upi" href="#"><i class="fas fa-arrow-up-right-from-square"></i>Open in UPI app</a>
+          <p class="fine">On desktop this link won't open an app — use the QR option instead.</p>
+        </div>
+      </div>
+
     </div>
 
-    <!-- Recorded Course Section -->
-    <div class="course-section">
-      <div class="popular-ribbon">Popular</div>
-      <div class="course-header">
-        <div class="course-icon">
-          <i class="fas fa-rocket"></i>
-        </div>
-        <h2 class="course-title">Mission Govt. Pharmacist Exam (Recorded Batch)</h2>
-        <div class="course-highlight">
-          <i class="fas fa-star"></i> Super Fast Preparation
-        </div>
-      </div>
-      
-      <ul class="course-features">
-        <li>200+ Recorded Video Lectures</li>
-        <li>100% Syllabus Coverage</li>
-        <li>Dedicated Lecture Library</li>
-        <li>24/7 Online Access, Unlimited Attempts</li>
-        <li>Mock Tests</li>
-        <li>7+ qualified educators from Jadavpur University, Kolkata & NIPER SAS Nagar</li>
-        <li>Top Ranked educators</li>
-        <li>Valid Till June, 2027</li>          
-      </ul>
-      
-      <div class="price-container">
-        <div class="price-tag">
-          <span class="price-decoration left">✦</span>
-          <span class="original-price">₹2,000</span>
-          ₹550
-          <span class="price-decoration right">✦</span>
-          <span class="discount-badge">72.5%</span>
-        </div>
-      </div>
-      
-      <div class="payment-options-container">
-        <div class="payment-option">
-          <p class="clickable" onclick="showQR('recorded')">
-            <i class="fas fa-qrcode"></i> Pay with QR Code
-          </p>
-          <div id="qrImagerecorded" class="hidden payment-details">
-            <div class="qr-image">
-              <img src="p_qr.jpeg" alt="recorded Course QR Code">
-            </div>
-            <p class="upi-text">Amount: ₹550</p>
-            <p class="timer"><i class="fas fa-clock"></i> Valid for: 15 minutes</p>
-          </div>
-        </div>
-        
-        <div class="payment-option">
-          <p class="clickable" onclick="showUPI('recorded')">
-            <i class="fas fa-mobile-alt"></i> Pay via UPI
-          </p>
-          <div id="upitextrecorded" class="hidden payment-details">
-            <p class="upi-text">update soon! (Use QR Code)</p>
-            <p><strong>Recipient:</strong> GPAT_GYAN Official</p>
-            <p class="upi-text">Amount: ₹550</p>
-            <p class="timer"><i class="fas fa-clock"></i> Valid for: 15 minutes</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="form-container">
-      <a href="https://forms.gle/uKzPT4tiVgrw2tRK8" class="form-button" target="_blank">
-        <i class="fas fa-check-circle"></i> Click Here to Verify Payment
-      </a>
-      <p style="font-size: clamp(0.9rem, 3.5vw, 1.1rem); color: var(--text-light); margin-top: 1rem;">
-        <i class="fas fa-exclamation-circle"></i> <strong>Important:</strong> After payment, complete verification form immediately for instant access.
-      </p>
-    </div>
-    
-    <div class="security-badge">
-      <i class="fas fa-envelope"></i>
-      <span>Email- hrgpatgyan@gmail.com | WhatsApp- 9433578335</span>
+    <div class="verify-block">
+      <h2 class="display" style="font-size:1.4rem;margin-bottom:0.5rem;">Already paid?</h2>
+      <p class="subhead" style="margin-bottom:1.3rem;">Have your order reference ready, then confirm here so we can activate your access.</p>
+      <a class="verify-btn" href="https://forms.gle/uKzPT4tiVgrw2tRK8" target="_blank"><i class="fas fa-circle-check"></i>Verify my payment</a>
     </div>
   </div>
-  
-  <footer class="footer">
-    <p>PMS is owned and administered by @GPAT_GYAN</p>
+
+  <footer>
+    <p>Email — hrgpatgyan@gmail.com &nbsp;|&nbsp; WhatsApp — 9433578335</p>
+    <p style="margin-top:0.4rem;opacity:0.7;">PMS owned and administered by @GPAT_GYAN &nbsp;·&nbsp; <button onclick="openAdmin()">Admin</button></p>
   </footer>
 
-  <script>
-    // Payment methods toggle
-    function showQR(courseType) {
-      // Hide all payment details first
-      document.querySelectorAll('.payment-details').forEach(el => {
-        el.classList.add('hidden');
-      });
-      
-      // Show the selected QR
-      const qrElement = document.getElementById(`qrImage${courseType}`);
-      if (qrElement) {
-        qrElement.classList.remove('hidden');
-        // Scroll to the payment option
-        qrElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  <!-- Admin overlay -->
+  <div class="overlay" id="adminOverlay">
+    <div class="admin-box">
+      <button class="admin-close" onclick="closeAdmin()">&times;</button>
+      <div id="adminGate">
+        <h2>Admin sign-in</h2>
+        <p style="font-size:0.85rem;color:var(--ink-soft);">This is a basic client-side gate, not real authentication — anyone reading the page code can find the password. Don't use it to protect sensitive data.</p>
+        <input type="password" id="adminPassInput" class="admin-pass" placeholder="Admin password">
+        <button class="admin-refresh" onclick="checkAdminPass()">Enter</button>
+        <p id="adminPassError" style="color:var(--red);font-size:0.82rem;display:none;">Incorrect password.</p>
+      </div>
+      <div id="adminDash" style="display:none;">
+        <h2>Live traffic &amp; payments</h2>
+        <button class="admin-refresh" onclick="renderAdminDash()"><i class="fas fa-rotate"></i> Refresh</button>
+        <div class="admin-stats" id="adminStatCards"></div>
+        <h3 style="margin-top:1.2rem;font-size:1rem;">Per-course activity</h3>
+        <table class="admin-table" id="adminCourseTable"></table>
+        <h3 style="margin-top:1.2rem;font-size:1rem;">Recent events</h3>
+        <table class="admin-table" id="adminEventsTable"></table>
+        <p class="admin-note">Counts are aggregated across everyone who has this page open — visits, course views and payment-method clicks are logged automatically; "Verified" payments still need manual confirmation from the Google Form, since this page has no payment-gateway backend to confirm money movement automatically.</p>
+      </div>
+    </div>
+  </div>
+
+<script>
+/* ===================== CONFIG ===================== */
+const CONFIG = {
+  upiId: "your-upi-id@bank",     // TODO: replace with the real UPI ID
+  payeeName: "GPAT GYAN Official",
+  adminPassword: "gpat-admin-2026" // TODO: change this before publishing
+};
+const STORAGE_KEY = "gpatgyan:analytics";
+const HEARTBEAT_MS = 20000;
+const ACTIVE_WINDOW_MS = 60000;
+const sessionId = Math.random().toString(36).slice(2) + Date.now();
+const todayKey = () => new Date().toISOString().slice(0,10);
+
+/* ===================== STORAGE HELPERS ===================== */
+async function loadAnalytics(){
+  try{
+    const res = await window.storage.get(STORAGE_KEY, true);
+    if(res && res.value) return JSON.parse(res.value);
+  }catch(e){ /* key doesn't exist yet */ }
+  return { totalVisits:0, visitsByDay:{}, courseViews:{}, paymentClicks:{}, presence:{}, events:[] };
+}
+async function saveAnalytics(data){
+  try{
+    await window.storage.set(STORAGE_KEY, JSON.stringify(data), true);
+  }catch(e){ console.error("Storage save failed", e); }
+}
+function pruneAndCountPresence(presence){
+  const now = Date.now();
+  let active = 0;
+  for(const id in presence){
+    if(now - presence[id] > ACTIVE_WINDOW_MS) delete presence[id];
+    else active++;
+  }
+  return active;
+}
+function addEvent(data, type, detail){
+  data.events.unshift({ type, detail, ts: Date.now() });
+  data.events = data.events.slice(0, 60);
+}
+function genOrderRef(course, method){
+  const stamp = Date.now().toString(36).toUpperCase();
+  return `GG-${course.toUpperCase()}-${method.toUpperCase()}-${stamp}`;
+}
+
+/* ===================== INIT / PULSE ===================== */
+let analyticsCache = null;
+const viewedCourses = new Set();
+
+async function initAnalytics(){
+  const data = await loadAnalytics();
+  data.totalVisits = (data.totalVisits||0) + 1;
+  const day = todayKey();
+  data.visitsByDay[day] = (data.visitsByDay[day]||0) + 1;
+  data.presence[sessionId] = Date.now();
+  addEvent(data, "visit", "New page visit");
+  const active = pruneAndCountPresence(data.presence);
+  analyticsCache = data;
+  await saveAnalytics(data);
+  updatePulseUI(data, active);
+
+  setInterval(async ()=>{
+    const fresh = await loadAnalytics();
+    fresh.presence[sessionId] = Date.now();
+    const activeNow = pruneAndCountPresence(fresh.presence);
+    analyticsCache = fresh;
+    await saveAnalytics(fresh);
+    updatePulseUI(fresh, activeNow);
+  }, HEARTBEAT_MS);
+}
+
+function paymentsToday(data){
+  const day = todayKey();
+  let count = 0;
+  for(const c in data.paymentClicks){
+    for(const m in data.paymentClicks[c]){
+      count += (data.paymentClicks[c][m].byDay && data.paymentClicks[c][m].byDay[day]) || 0;
+    }
+  }
+  return count;
+}
+
+function updatePulseUI(data, active){
+  document.getElementById('statActive').textContent = active;
+  document.getElementById('statVisitsToday').textContent = data.visitsByDay[todayKey()] || 0;
+  document.getElementById('statPaysToday').textContent = paymentsToday(data);
+  document.querySelectorAll('[data-course-views]').forEach(el=>{
+    const c = el.getAttribute('data-course-views');
+    el.textContent = (data.courseViews[c]||0);
+  });
+}
+
+/* ===================== COURSE VIEW TRACKING ===================== */
+const observer = new IntersectionObserver(async (entries)=>{
+  for(const entry of entries){
+    if(entry.isIntersecting){
+      const course = entry.target.getAttribute('data-course');
+      if(!viewedCourses.has(course)){
+        viewedCourses.add(course);
+        const data = await loadAnalytics();
+        data.courseViews[course] = (data.courseViews[course]||0) + 1;
+        addEvent(data, "course_view", course);
+        analyticsCache = data;
+        await saveAnalytics(data);
+        updatePulseUI(data, pruneAndCountPresence(data.presence));
       }
+    }
+  }
+}, { threshold: 0.4 });
+document.querySelectorAll('.course').forEach(el=>observer.observe(el));
+
+/* ===================== PAYMENT PANELS ===================== */
+document.querySelectorAll('.pay-btn').forEach(btn=>{
+  btn.addEventListener('click', async ()=>{
+    const course = btn.getAttribute('data-course');
+    const action = btn.getAttribute('data-action'); // qr | upi
+    const panelKey = `${course}-${action}`;
+    document.querySelectorAll('.pay-panel').forEach(p=>p.classList.remove('show'));
+    const panel = document.querySelector(`[data-panel="${panelKey}"]`);
+    if(panel){
+      panel.classList.add('show');
+      panel.scrollIntoView({behavior:'smooth', block:'center'});
     }
 
-    function showUPI(courseType) {
-      // Hide all payment details first
-      document.querySelectorAll('.payment-details').forEach(el => {
-        el.classList.add('hidden');
-      });
-      
-      // Show the selected UPI
-      const upiElement = document.getElementById(`upiText${courseType}`);
-      if (!upiElement) {
-        // Try lowercase version for crash course
-        const upiElementAlt = document.getElementById(`upitext${courseType}`);
-        if (upiElementAlt) {
-          upiElementAlt.classList.remove('hidden');
-          upiElementAlt.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-      } else {
-        upiElement.classList.remove('hidden');
-        // Scroll to the payment option
-        upiElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
+    const ref = genOrderRef(course, action);
+    const refEl = document.querySelector(`[data-ref="${panelKey}"]`);
+    if(refEl) refEl.textContent = `REF ${ref}`;
+
+    if(action === 'upi'){
+      const priceEl = btn.closest('.course');
+      const amount = priceEl.getAttribute('data-price');
+      const link = `upi://pay?pa=${encodeURIComponent(CONFIG.upiId)}&pn=${encodeURIComponent(CONFIG.payeeName)}&am=${amount}&cu=INR&tn=${encodeURIComponent(ref)}`;
+      const linkEl = document.querySelector(`[data-upi-link="${panelKey}"]`);
+      if(linkEl) linkEl.setAttribute('href', link);
     }
-    
-    // Initialize interactive elements
-    document.addEventListener('DOMContentLoaded', function() {
-      // Add ripple effect to buttons
-      const buttons = document.querySelectorAll('.form-button');
-      buttons.forEach(button => {
-        button.addEventListener('click', function(e) {
-          const x = e.clientX - e.target.getBoundingClientRect().left;
-          const y = e.clientY - e.target.getBoundingClientRect().top;
-          
-          const ripple = document.createElement('span');
-          ripple.classList.add('ripple');
-          ripple.style.left = `${x}px`;
-          ripple.style.top = `${y}px`;
-          
-          this.appendChild(ripple);
-          
-          setTimeout(() => {
-            ripple.remove();
-          }, 1000);
-        });
-      });
-    });
-  </script>
+
+    const data = await loadAnalytics();
+    if(!data.paymentClicks[course]) data.paymentClicks[course] = {};
+    if(!data.paymentClicks[course][action]) data.paymentClicks[course][action] = { total:0, byDay:{} };
+    const day = todayKey();
+    data.paymentClicks[course][action].total += 1;
+    data.paymentClicks[course][action].byDay[day] = (data.paymentClicks[course][action].byDay[day]||0) + 1;
+    addEvent(data, "payment_click", `${course} · ${action} · ${ref}`);
+    analyticsCache = data;
+    await saveAnalytics(data);
+    updatePulseUI(data, pruneAndCountPresence(data.presence));
+  });
+});
+
+/* ===================== ADMIN DASHBOARD ===================== */
+function openAdmin(){
+  document.getElementById('adminOverlay').classList.add('show');
+}
+function closeAdmin(){
+  document.getElementById('adminOverlay').classList.remove('show');
+  document.getElementById('adminGate').style.display = 'block';
+  document.getElementById('adminDash').style.display = 'none';
+  document.getElementById('adminPassInput').value = '';
+  document.getElementById('adminPassError').style.display = 'none';
+}
+function checkAdminPass(){
+  const val = document.getElementById('adminPassInput').value;
+  if(val === CONFIG.adminPassword){
+    document.getElementById('adminGate').style.display = 'none';
+    document.getElementById('adminDash').style.display = 'block';
+    renderAdminDash();
+  }else{
+    document.getElementById('adminPassError').style.display = 'block';
+  }
+}
+async function renderAdminDash(){
+  const data = await loadAnalytics();
+  const active = pruneAndCountPresence(data.presence);
+  const day = todayKey();
+
+  document.getElementById('adminStatCards').innerHTML = `
+    <div class="stat-card"><div class="num">${active}</div><div class="lab">Active now</div></div>
+    <div class="stat-card"><div class="num">${data.totalVisits||0}</div><div class="lab">Total visits</div></div>
+    <div class="stat-card"><div class="num">${data.visitsByDay[day]||0}</div><div class="lab">Visits today</div></div>
+    <div class="stat-card"><div class="num">${paymentsToday(data)}</div><div class="lab">Payment clicks today</div></div>
+  `;
+
+  let rows = `<tr><th>Course</th><th>Views</th><th>QR clicks</th><th>UPI clicks</th></tr>`;
+  const courses = ['1year','2year','crash','recorded'];
+  courses.forEach(c=>{
+    const pc = data.paymentClicks[c] || {};
+    rows += `<tr><td>${c}</td><td>${data.courseViews[c]||0}</td><td>${(pc.qr&&pc.qr.total)||0}</td><td>${(pc.upi&&pc.upi.total)||0}</td></tr>`;
+  });
+  document.getElementById('adminCourseTable').innerHTML = rows;
+
+  let evRows = `<tr><th>When</th><th>Type</th><th>Detail</th></tr>`;
+  (data.events||[]).slice(0,20).forEach(ev=>{
+    const t = new Date(ev.ts).toLocaleTimeString();
+    evRows += `<tr><td>${t}</td><td>${ev.type}</td><td>${ev.detail||''}</td></tr>`;
+  });
+  document.getElementById('adminEventsTable').innerHTML = evRows;
+}
+
+/* ===================== START ===================== */
+initAnalytics();
+</script>
 </body>
 </html>
